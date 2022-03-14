@@ -15,6 +15,8 @@ Final project for Human-Computer Interaction design Winter 2022
 
 `cd play.gg-app`
 
-**4. Run application**
+**4. Run application in terminal**
 
 `expo start`
+
+Follow the instructions given after running `expo start` you can run it in a web browser or on a phone
