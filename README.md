@@ -20,3 +20,5 @@ Final project for Human-Computer Interaction design Winter 2022
 `expo start`
 
 Follow the instructions given after running `expo start` you can run it in a web browser or on a phone
+
+Make sure to navigate to the right branch using `git checkout <branch_name>` in the terminal
