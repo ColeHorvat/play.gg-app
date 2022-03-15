@@ -10,13 +10,15 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "config": "^3.3.7",
     "expo": "~44.0.0",
     "expo-status-bar": "~1.2.0",
     "openid-client": "^5.1.4",
     "passport-steam": "^1.0.17",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "react-native": "0.64.3",
+    "react-native": "^0.67.3",
+    "react-native-config": "^1.4.5",
     "react-native-paper": "^4.11.2",
     "react-native-tailwindcss": "^1.1.11",
     "react-native-web": "0.17.1"
