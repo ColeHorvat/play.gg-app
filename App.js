@@ -1,9 +1,21 @@
 import React from 'react'
-import Navigator from './routes/homeStack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import Dashboard from './screens/Dashboard'
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-	<Navigator />
+	<NavigationContainer>
+		<Stack.Navigator>
+			<Stack.Screen
+				name="Dashboard"
+				component={Dashboard}
+				options={{ title: 'Dashboard' }}
+			/>
+		</Stack.Navigator>
+	</NavigationContainer>
   );
 }
 
