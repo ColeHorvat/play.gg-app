@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { t } from 'react-native-tailwindcss';
 import React, { useState, useEffect } from 'react';
+import ApiCalendar from 'react-google-calendar-api';
 
 export default function App() {
 	const API_KEY = '17CB3BD18765C9F04AAB50A3EC9CA2A3';
@@ -11,6 +12,7 @@ export default function App() {
 	const [player, setPlayer] = useState([]);
 	const [loading, setLoading] = useState(true)
 
+	// Steam API Hook
 	useEffect(() => {
 		setInterval(() => {
 			fetch(URL)
@@ -28,9 +30,20 @@ export default function App() {
 		}, 1000)
 	})
 
+	function handleItemClick(event, name) {
+		if(name === 'signin')
+			ApiCalendar.handleAuthClick();
+		else if(name === 'signout')
+			ApiCalendar.handleSignoutClick();
+	}
+
 	return (
 		<View style={[t.flex1, t.justifyCenter, t.itemsCenter]}>
 			<Text> {loading ? 'Loading...' : player['personaname'] + " " + player['personastate']} </Text> 
+			<Button 
+				title="Google Calendar"
+				onPress={(e) => handleItemClick(e, 'signin')}
+			/> 
 			<StatusBar style="auto"/>
 		</View>
 	);
