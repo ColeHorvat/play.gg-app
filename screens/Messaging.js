@@ -31,22 +31,35 @@ const Messaging = ({ navigation }) => {
 				{ /* MESSAGES */ } 
 			</ScrollView>
 
-			<View styles={ styles.inputContainer }>
+			<View style = { styles.inputContainer }>
 				<TextInput
-					style={ styles.inputText }
+					style={ styles.messageInput }
+					placeholder="Send a message..."
 				/>
-				<Button
-					title=""
-				/>
-				<Icon.Button 
-					name="send"
-					color="#D92344"
-					backgroundColor="#73172F"
-					iconStyle={ styles.messageButtons }
 
-				>
+				<View style = { styles.messageButtons }> 
+					<Icon.Button 
+						name="inbox"
+						color="#D92344"
+						backgroundColor="#211626"
+						onPress={() => { console.log("INVITE") }}
+					>
 
-				</Icon.Button>
+					</Icon.Button>
+
+				</View>
+				
+				<View style = { styles.messageButtons }>
+					<Icon.Button 
+						name="send"
+						color="#D92344"
+						backgroundColor="#211626"
+						onPress={() => { console.log("SEND") }}
+					>
+
+					</Icon.Button>
+				</View>
+
 			</View>
 		</View>
 	)
@@ -76,15 +89,15 @@ const styles = StyleSheet.create({
 		backgroundColor: '#211626',
 	},
 	header: {
-		height: '10%',
+		height: 85,
 		width: '100%',
 		backgroundColor: '#73172F',
 		marginTop: Constants.statusBarHeight,
 		flexDirection: 'row',
 	},
 	icon: {
-		maxWidth: 75,
-		maxHeight: 75
+		width: 75,
+		height: 75
 	},
 	iconContainer: {
 		height: '100%',
@@ -109,18 +122,25 @@ const styles = StyleSheet.create({
 		color: '#FFFFFF'
 	},
 	inputContainer: {
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'center',
 	},
 	messageInput: {
 		height: 40,
-		margin: 12,
+		width: '65%',
+		marginBottom: 12,
+		marginHorizontal: 12,
 		borderWidth: 1,
 		padding: 10,
+		borderRadius: 25,
+		backgroundColor: '#FFFFFF'
 	},
 	messageButtons: {
-		
+		width : 45,
+		height : 40,
+		marginRight: 8,
+
 	}
 });
 
