@@ -1,11 +1,42 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { StyleSheet, Text, View, Image, ScrollView, TextInput, Pressable, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { t } from 'react-native-tailwindcss';
 import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/Feather'
 
+{ /* MESSAGE DATA */}
+
+// const messageData = [
+// 	{
+// 		method: 'send',
+// 		content: 'This is a test message'
+// 	},
+// 	{
+// 		method: 'receive',
+// 		content: 'This is a test message'
+// 	}	
+// ]
+
+
+
+{ /* MESSAGING PAGE */}
+
 const Messaging = ({ navigation }) => {
+
+	const [messageData, setMessageData] = useState([]);
+	const [messageText, setMessageText] = useState('');
+	const scrollView = useRef(null);
+	const textInput = useRef(null);
+
+	const messages = messageData.map((message) => {
+		if(message.method === 'send') {
+			return <SMessage content={message.content}/>
+		}
+	
+		return <RMessage content={message.content} />
+	})
+
 	return (
 		<View style={ styles.container }>
 			<StatusBar style="light" />
@@ -27,15 +58,22 @@ const Messaging = ({ navigation }) => {
 				</View>
 			</View>
 
-			<ScrollView>
-				<RMessage />
-				<SMessage />
+			<ScrollView
+				ref={scrollView}
+				onContentSizeChange={() => {
+					scrollView.current.scrollToEnd({ animated: true, index: -1 }, 200);
+				}}
+			>
+				{ messages }
 			</ScrollView>
 
 			<View style = { styles.inputContainer }>
 				<TextInput
+					ref={textInput}
 					style={ styles.messageInput }
 					placeholder="Send a message..."
+					onChangeText={messageText => setMessageText(messageText)}
+					defaultValue={messageText}
 				/>
 
 				<View style = { styles.messageButtons }> 
@@ -55,7 +93,7 @@ const Messaging = ({ navigation }) => {
 						name="send"
 						color="#D92344"
 						backgroundColor="#211626"
-						onPress={() => { console.log("SEND")  }}
+						onPress={ sendMessage }
 					>
 
 					</Icon.Button>
@@ -64,23 +102,46 @@ const Messaging = ({ navigation }) => {
 			</View>
 		</View>
 	)
+
+	{ /* MESSAGE COMPONENTS */}
+
+	function RMessage(props) {
+		return (
+			<View style = { [styles.balloon, styles.itemIn, { backgroundColor: "#4F4F4F" }]}>
+				<Text style = { {paddingTop: 5, color: 'white'} }>{ props.content }</Text>
+			</View>
+		)
+	}
+
+	function SMessage(props) {
+		return (
+			<View style = { [styles.balloon, styles.itemOut, { backgroundColor: "#B1132F" }]}>
+				<Text style = { {paddingTop: 5, color: 'white'} }>{ props.content }</Text>
+			</View>
+		)
+	}
+
+	{ /* UTIL FUNCTIONS */}
+
+	function sendMessage() { 
+		if(messageText != '') {
+			setMessageData([...messageData, { method: 'send', content: messageText }])
+			setMessageText('')
+			textInput.current.clear()
+
+		}
+	}
+
+	function receiveMessage() {
+		setMessageData([...messageData, { method: 'receive', content: 'NEW MESSAGE'}])
+	}
 }
 
-const RMessage = () => {
-	return (
-		<View style = { [styles.balloon, styles.itemIn, { backgroundColor: "#4F4F4F" }]}>
-			<Text style = { {paddingTop: 5, color: 'white'} }>Hey! This is a very long message aaaaaaahhhhhh</Text>
-		</View>
-	)
-}
 
-const SMessage = () => {
-	return (
-		<View style = { [styles.balloon, styles.itemOut, { backgroundColor: "#B1132F" }]}>
-			<Text style = { {paddingTop: 5, color: 'white'} }>Hey! This is a very long message aaaaaaaaaaaaaahhhhhhh</Text>
-		</View>
-	)
-}
+
+
+
+{ /* STYLES */}
 
 const styles = StyleSheet.create({
 
@@ -158,7 +219,7 @@ const styles = StyleSheet.create({
 		marginRight: 10
 	},
 	balloon: {
-		maxWidth: "50%",
+		maxWidth: '70%',
 		paddingHorizontal: 15,
 		paddingTop: 10,
 		paddingBottom: 15,
