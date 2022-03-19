@@ -43,9 +43,12 @@ const Messaging = ({ navigation }) => {
 			{/* HEADER */}
 			<View style={styles.header}>
 				<View style={styles.iconContainer}>
-					<Image 
-						source={require('../assets/images/playgg_logo_image_only.png')}
-						style={ styles.icon }	 
+					<Icon.Button 
+						name="chevron-left"
+						style={ styles.icon }
+						size={40}	 
+						color='white'
+						backgroundColor='#73172F'
 					/>
 				</View>
 				<View>
@@ -158,8 +161,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 	},
 	icon: {
-		width: 75,
-		height: 75
+		marginHorizontal: 12,
 	},
 	iconContainer: {
 		height: '100%',
