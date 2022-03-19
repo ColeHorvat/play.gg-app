@@ -28,7 +28,8 @@ const Messaging = ({ navigation }) => {
 			</View>
 
 			<ScrollView>
-				{ /* MESSAGES */ } 
+				<RMessage />
+				<SMessage />
 			</ScrollView>
 
 			<View style = { styles.inputContainer }>
@@ -54,7 +55,7 @@ const Messaging = ({ navigation }) => {
 						name="send"
 						color="#D92344"
 						backgroundColor="#211626"
-						onPress={() => { console.log("SEND") }}
+						onPress={() => { console.log("SEND")  }}
 					>
 
 					</Icon.Button>
@@ -65,18 +66,18 @@ const Messaging = ({ navigation }) => {
 	)
 }
 
-const SentMessage = () => {
+const RMessage = () => {
 	return (
-		<View>
-			
+		<View style = { [styles.balloon, styles.itemIn, { backgroundColor: "#4F4F4F" }]}>
+			<Text style = { {paddingTop: 5, color: 'white'} }>Hey! This is a very long message aaaaaaahhhhhh</Text>
 		</View>
 	)
 }
 
-const receivedMessage = () => {
+const SMessage = () => {
 	return (
-		<View>
-
+		<View style = { [styles.balloon, styles.itemOut, { backgroundColor: "#B1132F" }]}>
+			<Text style = { {paddingTop: 5, color: 'white'} }>Hey! This is a very long message aaaaaaaaaaaaaahhhhhhh</Text>
 		</View>
 	)
 }
@@ -128,8 +129,8 @@ const styles = StyleSheet.create({
 	},
 	messageInput: {
 		height: 40,
-		width: '65%',
-		marginBottom: 12,
+		width: '70%',
+		marginBottom: 16,
 		marginHorizontal: 12,
 		borderWidth: 1,
 		padding: 10,
@@ -138,9 +139,50 @@ const styles = StyleSheet.create({
 	},
 	messageButtons: {
 		width : 45,
-		height : 40,
-		marginRight: 8,
+		height : 45,
+		marginHorizontal: 2,
+		marginBottom: 12,
 
+	},
+	item: {
+		marginVertical: 14,
+		flexDirection: 'row',
+		flexWrap: "wrap"
+	},
+	itemIn: {
+		alignSelf: 'flex-start',
+		marginLeft: 10
+	},
+	itemOut: {
+		alignSelf: 'flex-end',
+		marginRight: 10
+	},
+	balloon: {
+		maxWidth: "50%",
+		paddingHorizontal: 15,
+		paddingTop: 10,
+		paddingBottom: 15,
+		borderRadius: 20,
+		margin: 12
+	},
+	arrowContainer: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		zIndex: -1
+	},
+	arrowLeftContainer: {
+		justifyContent: 'center',
+		alignItems: 'flex-start',
+	},
+	arrowLeft: {
+		left: -20,
+	},
+	arrowRightContainer: {
+		justifyContent: 'flex-end',
+		alignItems: 'flex-end'
 	}
 });
 
