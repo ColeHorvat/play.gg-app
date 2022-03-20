@@ -26,7 +26,7 @@ const Messaging = ({ navigation }) => {
 
 	const [messageData, setMessageData] = useState([]);
 	const [messageText, setMessageText] = useState('');
-	const [inviteActive, setInviteActive] = useState(true);
+	const [inviteActive, setInviteActive] = useState(false);
 	const [addedFriends, setAddedFriends] = useState([]);
 
 	const [date, setDate] = useState(new Date());
@@ -38,6 +38,11 @@ const Messaging = ({ navigation }) => {
 	
 	const scrollView = useRef(null);
 	const textInput = useRef(null);
+
+	const [inviteTitleText, setInviteTitleText] = useState(''); 
+	const [inviteDateText, setInviteDateText] = useState('');
+	const [inviteStartTimeText, setInviteStartTimeText] = useState('');
+	const [inviteEndTimeText, setInviteEndTimeText] = useState('');
 
 	const FRIENDS = {
 		"1":"SirPancakes"
@@ -150,24 +155,23 @@ const Messaging = ({ navigation }) => {
 	function InviteCard(props) {
 
 		// DATE PICKER STATES & FUNCTIONS
-
+		const [currentTitleValue, setCurrentTitleValue] = useState('')
 
 
 		const onChange = (event, selectedDate) => {
 			if(mode === 'date') {
-				const currentDate = selectedDate || date;
+				const currentDate = selectedDate;
 				setShow(Platform.ios);
-				const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
-
+				console.log('Title: ' + inviteTitleText)
 				setDate(currentDate);
-
-				console.log(date.toLocaleDateString())
+				setInviteDateText(currentDate.toLocaleDateString())
+				console.log(currentDate.toLocaleDateString())
 			} else {
 				if(timeMode === 'start') {
 					const currentStartTime = selectedDate || startTime;
 					setShow(Platform.ios);
 					setStartTime(currentStartTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""));
-
+					setInviteStartTimeText(currentStartTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""))
 					console.log(startTime)
 
 				} else if(timeMode === 'end') {
@@ -175,7 +179,7 @@ const Messaging = ({ navigation }) => {
 					setShow(Platform.ios);
 					setEndTime(currentEndTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""));
 
-
+					setInviteEndTimeText(currentEndTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""))
 					console.log(endTime);
 				}
 			}
@@ -202,6 +206,11 @@ const Messaging = ({ navigation }) => {
 			showMode('time')
 		}
 
+		function sendInviteMessage() {
+
+			const INVITE_MESSAGE = "INVITE\n\nTitle: " + currentTitleValue + "\n\nDate: " + inviteDateText + "\nStart time: " + inviteStartTimeText + "\nEnd time: " + inviteEndTimeText + "\nLink: <Google Calendar Link>"
+			setMessageData([...messageData, {method: 'send', content: INVITE_MESSAGE }])
+		}
 
 		return (
 			<View style = { [styles.inviteContainer] }>
@@ -226,6 +235,8 @@ const Messaging = ({ navigation }) => {
 						style={ [styles.inviteMessageInput, { marginTop: 12}]}
 						placeholder="Title"
 						placeholderTextColor='white'
+						//onSubmitEnding={ v => setInviteTitleText(v) }
+						defaultValue={ inviteTitleText }
 					/>
 
 					<TextInput
@@ -234,6 +245,8 @@ const Messaging = ({ navigation }) => {
 						placeholder='Date'
 						placeholderTextColor='white'
 						value={ date.toLocaleDateString() }
+						onChangeText={ onChange }
+						defaultValue={ date }
 					/>
 				</View>
 
@@ -244,6 +257,7 @@ const Messaging = ({ navigation }) => {
 							onPressIn={ showStartTimepicker } 
 							style={[styles.inviteMessageInput]}
 							value={ startTime }
+							onChangeText={ onChange }
 						/>
 					</View>
 				
@@ -253,6 +267,7 @@ const Messaging = ({ navigation }) => {
 							onPressIn={ showEndTimepicker } 
 							style={[styles.inviteMessageInput]}
 							value={ endTime }
+							onChangeText={ onChange }
 						/>
 					</View>
 
@@ -265,65 +280,9 @@ const Messaging = ({ navigation }) => {
 							display="default"
 							onChange={onChange}
 						/>
-					)}
-
-					{ /* SELECT FRIEND MENU */}
+					)} 
 					
 				</View>
-				
-				<View style={ [styles.inviteSendButton, { marginTop: 24, marginLeft: 10, flexDirection: 'row'}]} >	
-						{/* <Icon 
-							name="user"
-							style={ [styles.inviteSendButton]}
-							size={35}
-							color='white'
-						/> */}
-						{/* <View style={ [{width: 150, height: 200}]}>
-							<CustomerMultiPicker 
-								options={FRIENDS}
-								search={false} // should show search bar?
-								multiple={true} //
-								placeholder={"Friends"}
-								placeholderTextColor={'#757575'}
-								returnValue={"label"} // label or value
-								callback={(res)=> setAddedFriends(res)} // callback, array of selected items
-								rowBackgroundColor={"#eee"}
-								rowHeight={40}
-								rowRadius={5}
-								searchIconName="ios-checkmark"
-								searchIconColor="red"
-								searchIconSize={30}
-								iconColor={"#00a2dd"}
-								iconSize={30}
-								selectedIconName={"ios-checkmark-circle-outline"}
-								unselectedIconName={"ios-radio-button-off-outline"}
-								scrollViewHeight={130}
-							/>
-						</View> */}
-						{/* <RNPickerSelect
-							style={[styles.inviteSendButton]} 
-							onValueChange={(value) => console.log(value)}
-							Icon={() => { return <Icon name="chevron-down" size={30} color="white"/> }}
-							items={[
-								{ label: 'Football', value: 'football' },
-								{ label: 'Baseball', value: 'baseball' },
-								{ label: 'Hockey', value: 'hockey' },
-							]}
-							style={  { iconContainer: {
-								right: -20,
-							}}}
-							placeholder={{label: 'Select a friend...'}}
-						/> */}
-						
-						{/* <OptionsMenu 
-							style={[styles.inviteSendButton, { }]}
-							customButton={ ( <Icon name="chevron-down" size={30} color="white"/>) }
-							options={ FRIENDS }
-							actions={ FRIENDS.map((friend) => { addInviteFriend(friend) })}
-						/> */}
-						<Text> { addedFriends }</Text>
-				</View>
-					
 
 				<View style = { [ styles.inviteSendContainer ] }>
 					<View style = { [ styles.inviteSendButton ]}>
@@ -331,7 +290,7 @@ const Messaging = ({ navigation }) => {
 							name="send"
 							color="#D92344"
 							backgroundColor="#211626"
-							onPress={ sendMessage }
+							onPress={ sendInviteMessage }
 						/>
 					</View>
 				</View>
@@ -349,6 +308,8 @@ const Messaging = ({ navigation }) => {
 			textInput.current.clear()
 		}
 	}
+
+	
 
 	function receiveMessage() {
 		setMessageData([...messageData, { method: 'receive', content: 'NEW MESSAGE'}])
