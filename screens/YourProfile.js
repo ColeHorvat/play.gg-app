@@ -3,28 +3,26 @@ import { Text, View, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { t } from 'react-native-tailwindcss';
 
-const Dashboard = ({ navigation }) => {
+const YourProfile = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>This is the dashboard</Text>
+
+      <Text style={styles.header}>This is the YourProfile</Text>
       <StatusBar style="auto" />
 
-      
-
-
-      
     </View>
+
 
     
   )
 }
 
-export default Dashboard
+export default YourProfile
 
  const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#211626',
+      backgroundColor: '#73172f',
       alignItems: 'center',
       justifyContent: 'center',
    },
