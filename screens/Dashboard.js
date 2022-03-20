@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
 import { Text, View, StyleSheet, Button, Image, TouchableOpacity,  } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { t } from 'react-native-tailwindcss';
 
 
 
