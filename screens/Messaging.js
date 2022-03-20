@@ -29,10 +29,12 @@ const Messaging = ({ navigation }) => {
 	const [inviteActive, setInviteActive] = useState(true);
 	const [addedFriends, setAddedFriends] = useState([]);
 
-	const [date, setDate] = useState(new Date(1598051730000));
+	const [date, setDate] = useState(new Date());
+	const [startTime, setStartTime] = useState(new Date())
+	const [endTime, setEndTime] = useState(new Date())
 	const [mode, setMode] = useState('date');
 	const [show, setShow] = useState(false);
-
+	const [timeMode, setTimeMode] = useState('start');
 	
 	const scrollView = useRef(null);
 	const textInput = useRef(null);
@@ -152,9 +154,33 @@ const Messaging = ({ navigation }) => {
 
 
 		const onChange = (event, selectedDate) => {
-			const currentDate = selectedDate || date;
-			setShow(Platform.ios);
-			setDate(currentDate);
+			if(mode === 'date') {
+				const currentDate = selectedDate || date;
+				setShow(Platform.ios);
+				const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+
+				setDate(currentDate);
+
+				console.log(date.toLocaleDateString())
+			} else {
+				if(timeMode === 'start') {
+					const currentStartTime = selectedDate || startTime;
+					setShow(Platform.ios);
+					setStartTime(currentStartTime.toLocaleTimeString());
+
+					console.log(startTime)
+
+				} else if(timeMode === 'end') {
+					const currentEndTime = selectedDate || endTime;
+					setShow(Platform.ios);
+					setEndTime(currentEndTime.toLocaleTimeString());
+
+
+					console.log(endTime);
+				}
+			}
+
+			
 		}
 
 		const showMode = (currentMode) => {
@@ -166,8 +192,14 @@ const Messaging = ({ navigation }) => {
 			showMode('date');
 		}
 
-		const showTimepicker = () => {
+		const showStartTimepicker = () => {
+			setTimeMode('start')
 			showMode('time');
+		}
+
+		const showEndTimepicker = () => {
+			setTimeMode('end')
+			showMode('time')
 		}
 
 
@@ -201,6 +233,7 @@ const Messaging = ({ navigation }) => {
 						style={ [styles.inviteMessageInput]}
 						placeholder='Date'
 						placeholderTextColor='white'
+						value={ date.toLocaleDateString() }
 					/>
 				</View>
 
@@ -208,16 +241,18 @@ const Messaging = ({ navigation }) => {
 					<View style={ [ { flexDirection: 'row' } ]}>
 						<Text style={ [ {marginTop: 18, fontSize: 18, color: 'white', marginLeft: 10 }]}> Start:</Text>
 						<TextInput
-							onPressIn={ showTimepicker } 
+							onPressIn={ showStartTimepicker } 
 							style={[styles.inviteMessageInput]}
+							value={ startTime }
 						/>
 					</View>
 				
 					<View style={ { flexDirection: 'row'} }>
 						<Text style={ [ { marginTop: 18, fontSize: 18, color: 'white', marginLeft: 10} ]}> End:</Text>
 						<TextInput
-							onPressIn={ showTimepicker } 
+							onPressIn={ showEndTimepicker } 
 							style={[styles.inviteMessageInput]}
+							value={ endTime }
 						/>
 					</View>
 
