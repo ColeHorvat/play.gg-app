@@ -166,14 +166,14 @@ const Messaging = ({ navigation }) => {
 				if(timeMode === 'start') {
 					const currentStartTime = selectedDate || startTime;
 					setShow(Platform.ios);
-					setStartTime(currentStartTime.toLocaleTimeString());
+					setStartTime(currentStartTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""));
 
 					console.log(startTime)
 
 				} else if(timeMode === 'end') {
 					const currentEndTime = selectedDate || endTime;
 					setShow(Platform.ios);
-					setEndTime(currentEndTime.toLocaleTimeString());
+					setEndTime(currentEndTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""));
 
 
 					console.log(endTime);
