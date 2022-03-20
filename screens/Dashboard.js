@@ -13,6 +13,7 @@ const Dashboard = ({ navigation }) => {
 	const BASE_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=';
 
 	const [show, setShow] = useState(false);
+	const [didLoad, setDidLoad] = useState(false);
 	const [friends, setFriends] = useState([ 
 		{
 			name: '',
@@ -21,17 +22,9 @@ const Dashboard = ({ navigation }) => {
 			SteamID: '76561198124794637',
 			Platform: 'Steam'
 		},
-		{
-			name: '',
-			status: null,
-			gamePlaying: '',
-			SteamID: RB_STEAMID,
-			Platform: 'Steam'
-		}
 	]);
 
-	useEffect(() => {
-		const interval = setInterval(() => {
+	function getSteamInfo() {
 			friends.map((friend, i) => {
 				fetch(BASE_URL + friend.SteamID)
 				.then((response) => response.json())
@@ -63,6 +56,16 @@ const Dashboard = ({ navigation }) => {
 					console.error(error);
 				})
 			})
+	}
+
+	useEffect(() => {
+		if(!didLoad) {
+			getSteamInfo()
+			setDidLoad(true)
+		}
+
+		const interval = setInterval(() => {
+			getSteamInfo()
 		}, 2000)
 		return () => clearInterval(interval)
 	}, [])
