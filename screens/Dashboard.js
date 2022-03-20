@@ -31,8 +31,7 @@ const Dashboard = ({ navigation }) => {
 	]);
 
 	useEffect(() => {
-
-		setInterval(() => {
+		const interval = setInterval(() => {
 			friends.map((friend, i) => {
 				fetch(BASE_URL + friend.SteamID)
 				.then((response) => response.json())
@@ -44,8 +43,9 @@ const Dashboard = ({ navigation }) => {
 					// friend.status = player['personastate'];
 					// if(player['gameextrainfo'])
 					// 	friend.gamePlaying = player['gameextrainfo']
-
-					const updatedFriends = [...friends];
+					
+					let updatedFriends = [...friends]
+					console.log(updatedFriends + i)
 					updatedFriends[i].name = player['personaname']
 					updatedFriends[i].status = player['personastate'];
 					if(player['gameextrainfo'])
@@ -56,6 +56,7 @@ const Dashboard = ({ navigation }) => {
 						}
 					else 
 						updatedFriends[i].gamePlaying = ''
+					
 					setFriends(updatedFriends)
 				})
 				.catch(error => {
@@ -63,7 +64,8 @@ const Dashboard = ({ navigation }) => {
 				})
 			})
 		}, 2000)
-	})
+		return () => clearInterval(interval)
+	}, [])
 
 	return (
 		<View style={styles.container}>
