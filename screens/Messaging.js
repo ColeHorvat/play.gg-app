@@ -5,21 +5,6 @@ import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/Feather'
 import DateTimePicker from '@react-native-community/datetimepicker'
 
-{ /* MESSAGE DATA */}
-
-// const messageData = [
-// 	{
-// 		method: 'send',
-// 		content: 'This is a test message'
-// 	},
-// 	{
-// 		method: 'receive',
-// 		content: 'This is a test message'
-// 	}	
-// ]
-
-
-
 { /* MESSAGING PAGE */}
 
 const Messaging = ({ navigation, route }) => {
@@ -283,7 +268,7 @@ const Messaging = ({ navigation, route }) => {
 							value={date}
 							mode={mode}
 							is24Hour={true}
-							display="default"
+							display="spinner"
 							onChange={onChange}
 						/>
 					)} 

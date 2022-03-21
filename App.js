@@ -16,22 +16,24 @@ export default function App() {
 	<NavigationContainer>
 		<Stack.Navigator initialRoutName="Route" headerMode="false" 
                        screenOptions={{headerShown: false }}>
-			
-			<Stack.Screen name="MainLoginScreen" component={LoginView} />
-			
+
 			<Stack.Screen
 				name="Dashboard"
 				component={Dashboard}
 				options={{ title: 'Dashboard', headerShown:false }}
 			/>
-
-    		<Stack.Screen 
+			<Stack.Screen 
 				name="Messaging"
 				component={Messaging}
 				options = {{
 					headerShown: false,
 				}}
 			/>
+			<Stack.Screen name="MainLoginScreen" component={LoginView} />
+			
+
+
+
 
 
 			
