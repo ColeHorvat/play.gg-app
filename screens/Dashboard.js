@@ -1,31 +1,99 @@
-import React, { useState } from 'react'
-import { Text, View, StyleSheet, Button, Image, TouchableOpacity, } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { t } from 'react-native-tailwindcss';
+import React, { useState, useEffect } from 'react'
+import { Text, View, StyleSheet, Button, Image, TouchableOpacity, ScrollView, Pressabble } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
+import Icon from 'react-native-vector-icons/Feather'
+
+
 
 const Dashboard = ({ navigation }) => {
+	const API_KEY = '17CB3BD18765C9F04AAB50A3EC9CA2A3'
+	const RB_STEAMID = '76561198114121125';
+	const RB_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=' + RB_STEAMID;
+	const BASE_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=';
+	
+	const [showProfile, setShowProfile] = useState(false);
+	const [didLoad, setDidLoad] = useState(false);
+	const [friends, setFriends] = useState([ 
+		{
+			name: '',
+			status: null,
+			gamePlaying: '',
+			SteamID: '76561198124794637',
+			Platform: 'Steam',
+			menuButtonPressed: false
+		},
+	]);
 
-	const [show, setShow] = useState(false);
+	function getSteamInfo() {
+			friends.map((friend, i) => {
+				fetch(BASE_URL + friend.SteamID)
+				.then((response) => response.json())
+				.then((responseJson) => {
+					return responseJson['response']['players']['0'];
+				})
+				.then(player => {
+					
+					let updatedFriends = [...friends]
+					console.log(updatedFriends + i)
+					updatedFriends[i].name = player['personaname']
+					updatedFriends[i].status = player['personastate'];
+					if(player['gameextrainfo'])
+						if(player['gameextrainfo'].length < 19)
+							updatedFriends[i].gamePlaying = player['gameextrainfo']
+						else {
+							updatedFriends[i].gamePlaying = player['gameextrainfo'].substring(0, 18) + '...' 
+						}
+					else 
+						updatedFriends[i].gamePlaying = ''
+					
+					setFriends(updatedFriends)
+				})
+				.catch(error => {
+					console.error(error);
+				})
+			})
+	}
+
+	
+	useEffect(() => {
+		if(!didLoad) {
+			getSteamInfo()
+			setDidLoad(true)
+		}
+
+		const interval = setInterval(() => {
+			getSteamInfo()
+		}, 2000)
+		return () => clearInterval(interval)
+	}, [])
 
 	return (
 		<View style={styles.container}>
+			<StatusBar style="light" />
+			{/* HEADER */}
+			<View style={styles.header}>
 
-			{show && (
+				<Image style={styles.logo} source={require('../assets/playgg_logo_concept.png')} />
+
+
+				<TouchableOpacity
+					onPress={
+						() => { setShowProfile(!showProfile) }
+
+					}>
+					<View style={styles.menuLogoContainer}>
+						<Image style={styles.menuLogo} source={require('../assets/hamburger_icon.png')} />
+					</View>
+				</TouchableOpacity>
+
+			</View>
+
+			{showProfile && (
 
 				<View style={styles.profile}>
 
-
-					<TouchableOpacity style={{ alignSelf: 'flex-start', marginLeft: 8, }}
-						onPress={
-							() => { setShow(!show) }
-						}>
-
-						<View style={styles.menuLogoContainer}>
-							<Image style={styles.menuLogo} source={require('../assets/hamburger_icon.png')} />
-						</View>
-
-					</TouchableOpacity>
 
 					<View style={{ marginTop: 18, alignItems: 'center' }}>
 						<ProfilePicture
@@ -87,46 +155,102 @@ const Dashboard = ({ navigation }) => {
 				</View>)}
 
 
-			{/* HEADER */}
-			<View style={styles.header}>
 
-				<Image style={styles.logo} source={require('../assets/playgg_logo_concept.png')} />
+			<ScrollView>
+				{friends.map(friend => (
+					<TouchableOpacity 
+					>
+						<View style={ styles.cardContainer }>
+							<View style={ { display: 'flex', flexDirection: 'row', alignSelf:'flex-start', marginLeft: 12, marginTop: 12 } }>
+								<ProfilePicture 
+									width={75}
+									height={75}
+									requirePicture={require('../assets/avatar.jpg')}
+									isPicture={true}
+									user="SirPancakes"	
+								/>
+							</View>
 
+							<View style={ [styles.header, {justifyContent: 'center', flexDirection: 'column', marginHorizontal: 24, marginBottom: 42}] }>
+								<Text style={ [styles.headerNameText, {color: 'white', fontSize: 24}] }> {friend.name} </Text>
+								<View style={ {flexDirection: 'row', alignItems: 'center'} }>
+									{friend.status >= 1 && (
+										<Image 
+											source={require('../assets/steam_logo.png')}
+											style = { {width: 20, height: 20} }
+										/>
+									)}
 
-				<TouchableOpacity
-					onPress={
-						() => { setShow(!show) }
+									<Text style={ [styles.headerNameText, {color: 'white', fontSize: 16}] }> {friend.gamePlaying != '' ? "Playing: " + friend.gamePlaying : ''} 
+										<Text style={ [styles.headerNameText, {color: 'white', fontSize: 16}]}>
+											{
+												StatusText(friend)
+											}	
+										</Text> 
+									</Text>
+								</View>
+							</View>
+							<View style={ { position: 'absolute', right:0, top: 50, width : '15%', marginRight: 12} }>
+								<Icon.Button 
+									name='message-square'
+									size={40}
+									backgroundColor="#73172f"
+									onPress={() => navigation.navigate('Messaging')}
+								>
 
-					}>
-					<View style={styles.menuLogoContainer}>
-						<Image style={styles.menuLogo} source={require('../assets/hamburger_icon.png')} />
-					</View>
-				</TouchableOpacity>
+								</Icon.Button>
+							</View>
 
-			</View>
-
-
+						</View>
+					</TouchableOpacity>
+				))}
+			</ScrollView>
 		</View>
-
 	)
-}
+	
+	function StatusText(friend) {
+			if(friend.gamePlaying === '') {
+				switch(friend.status) {
+					case 0:
+						return 'Offline'
+					case 1:
+						return 'Online'
+					case 2:
+						return 'Busy'
+					case 3:
+						return 'Away'
+					case 4: 
+						return 'Snooze'
+					case 5:
+						return 'Online'
+					case 6:
+						return 'Online'
+					default:
+						return 'Loading...'
+				}
+			}
+		}
+	}
+	
+	
+	// return (
+	// 	<View style={styles.container}>
 
 
 
 
-export default Dashboard
+
+
+
+	// 	</View>
+
+	// )
 
 const styles = StyleSheet.create({
 	container: {
 		height: '100%',
 		width: '100%',
 		backgroundColor: '#211626'
-	},
-
-	header: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		backgroundColor: '#73172f'
 	},
 
 	logo: {
@@ -139,6 +263,7 @@ const styles = StyleSheet.create({
 		height: 50,
 
 	},
+
 
 	menuLogoContainer: {
 		alignItems: 'center',
@@ -157,8 +282,31 @@ const styles = StyleSheet.create({
 
 
 	},
+	container: {
+		height: '100%',
+		width: '100%',
+		backgroundColor: '#211626'
+	},
 
-	nameText: {
+	header: {
+		flexDirection: "row",
+		backgroundColor: '#73172f',
+		justifyContent: 'space-between',
+		marginTop: Constants.statusBarHeight,
+	},
+
+	logo: {
+		width: 75,
+		height: 75,
+	},
+
+	menuLogo: {
+		width: 75,
+		height: 75,
+
+	},
+
+	headerNameText: {
 		fontSize: 25,
 		fontWeight: 'bold',
 		color: '#D92344',
@@ -181,4 +329,14 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		marginBottom: 10
 	},
+	cardContainer: {
+		height: 150,
+		width: '100%',
+		backgroundColor: '#73172F',
+		marginVertical: 24,
+		flexDirection: 'row',
+	}
+
 });
+
+export default Dashboard
