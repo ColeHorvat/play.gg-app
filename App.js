@@ -20,7 +20,7 @@ export default function App() {
 				component={Dashboard}
 				options={{ title: 'Dashboard', headerShown:false }}
 			/>
-			<Stack.Screen name="MainLoginScreen" component={LoginView} />
+		<Stack.Screen name="MainLoginScreen" component={LoginView} />
         	<Stack.Screen name="EmailSignUp1" component={EmailSignUpView1} />
         	<Stack.Screen name="EmailSignUp2" component={EmailSignUpView2} />
         	<Stack.Screen name="EmailSignUp3" component={EmailSignUpView3} />
