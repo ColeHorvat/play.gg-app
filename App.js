@@ -2,6 +2,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Dashboard from './screens/Dashboard'
+import LoginView from './screens/MainLoginScreen';
 import EmailSignUpView1 from './screens/EmailSignUpScreen1';
 import EmailSignUpView2 from './screens/EmailSignUpScreen2';
 import EmailSignUpView3 from './screens/EmailSignUpScreen3';
@@ -20,7 +21,7 @@ export default function App() {
 				component={Dashboard}
 				options={{ title: 'Dashboard', headerShown:false }}
 			/>
-			<Stack.Screen name="MainLoginScreen" component={LoginView} />
+		<Stack.Screen name="MainLoginScreen" component={LoginView} />
         	<Stack.Screen name="EmailSignUp1" component={EmailSignUpView1} />
         	<Stack.Screen name="EmailSignUp2" component={EmailSignUpView2} />
         	<Stack.Screen name="EmailSignUp3" component={EmailSignUpView3} />
