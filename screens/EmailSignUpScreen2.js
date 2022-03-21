@@ -34,7 +34,7 @@ const EmailSignUp2 = ({ navigation }) => {
     /* CONTAINER  */
     <View style={styles.container}>
       <StatusBar style='light' />
-      <ImageBackground source={require('./assets/background_1.png')} resizeMode='stretch' style={styles.backgroundImage}>
+      <ImageBackground source={require('../assets/background_1.png')} resizeMode='stretch' style={styles.backgroundImage}>
 
           
 

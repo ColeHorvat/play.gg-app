@@ -13,22 +13,22 @@ const LoginView = ({ navigation }) => {
       <StatusBar style='light' />
       <View style={styles.header}>
         <Image
-          source={require('./assets/playgg_logo_concept_text.png')}
+          source={require('../assets/playgg_logo_concept_text.png')}
           style={styles.icon}
         />
       </View>
       <View style={styles.signUpMenu}>
 
         <Image 
-          source={require('./assets/facebook_auth.png')}
+          source={require('../assets/facebook_auth.png')}
           style={styles.authImg}
         />
         <Image 
-          source={require('./assets/twitter_auth.png')}
+          source={require('../assets/twitter_auth.png')}
           style={styles.authImg}
         />
         <Image
-          source={require('./assets/google_auth.png')}
+          source={require('../assets/google_auth.png')}
           style={styles.authImg}
         />
         <Text style={styles.signUpOptionText} > ⎯ OR ⎯</Text>

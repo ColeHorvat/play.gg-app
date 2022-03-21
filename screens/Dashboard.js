@@ -80,9 +80,9 @@ const Dashboard = ({ navigation }) => {
 
 				<TouchableOpacity
 					onPress={
-						() => { setShowProfile(!showProfile) }
-
-					}>
+						() => { setShowProfile(!showProfile) }}
+						
+					>
 					<View style={styles.menuLogoContainer}>
 						<Image style={styles.menuLogo} source={require('../assets/hamburger_icon.png')} />
 					</View>
@@ -93,6 +93,18 @@ const Dashboard = ({ navigation }) => {
 			{showProfile && (
 
 				<View style={styles.profile}>
+
+
+					<TouchableOpacity style={{ alignSelf: 'flex-start', marginLeft: 8, }}
+						onPress={
+							() => { setShowProfile(!showProfile) }
+						}>
+
+						<View style={styles.menuLogoContainer}>
+							<Image style={styles.menuLogo} source={require('../assets/hamburger_icon.png')} />
+						</View>
+
+					</TouchableOpacity>
 
 
 					<View style={{ marginTop: 18, alignItems: 'center' }}>
@@ -279,6 +291,7 @@ const styles = StyleSheet.create({
 		width: '75%',
 		position: 'absolute',
 		zIndex: 2,
+		marginTop: Constants.statusBarHeight,
 
 
 	},
@@ -293,17 +306,6 @@ const styles = StyleSheet.create({
 		backgroundColor: '#73172f',
 		justifyContent: 'space-between',
 		marginTop: Constants.statusBarHeight,
-	},
-
-	logo: {
-		width: 75,
-		height: 75,
-	},
-
-	menuLogo: {
-		width: 75,
-		height: 75,
-
 	},
 
 	headerNameText: {
@@ -335,7 +337,14 @@ const styles = StyleSheet.create({
 		backgroundColor: '#73172F',
 		marginVertical: 24,
 		flexDirection: 'row',
-	}
+	},
+	nameText: {
+		fontSize: 25,
+		fontWeight: 'bold',
+		color: '#D92344',
+		marginTop: 4,
+		marginBottom: 4
+	},
 
 });
 

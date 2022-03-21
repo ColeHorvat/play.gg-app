@@ -25,7 +25,7 @@ const EmailSignIn1 = ({ navigation }) => {
       return;
     }
     // replace with navigation
-    Alert.alert('You are logged in')
+    navigation.navigate('Dashboard');
   };
 
 
@@ -36,7 +36,7 @@ const EmailSignIn1 = ({ navigation }) => {
       <View style={styles.header}>
        
         <Image
-          source={require('./assets/playgg_logo_concept_text.png')}
+          source={require('../assets/playgg_logo_concept_text.png')}
           style={styles.icon}
         />
       </View>

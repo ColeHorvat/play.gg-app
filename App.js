@@ -6,6 +6,7 @@ import EmailSignUpView1 from './screens/EmailSignUpScreen1';
 import EmailSignUpView2 from './screens/EmailSignUpScreen2';
 import EmailSignUpView3 from './screens/EmailSignUpScreen3';
 import EmailSigninView1 from './screens/EmailSignInScreen1';
+import LoginView from './screens/MainLoginScreen';
 
 const Stack = createNativeStackNavigator();
 
