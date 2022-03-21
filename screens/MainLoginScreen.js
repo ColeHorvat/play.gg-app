@@ -19,11 +19,11 @@ const LoginView = ({ navigation }) => {
       </View>
       <View style={styles.signUpMenu}>
 
-        <Image
+        <Image 
           source={require('./assets/facebook_auth.png')}
           style={styles.authImg}
         />
-        <Image
+        <Image 
           source={require('./assets/twitter_auth.png')}
           style={styles.authImg}
         />
@@ -153,4 +153,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginView
- 
