@@ -16,11 +16,11 @@ const EmailSignUp2 = ({ navigation }) => {
     
     
     if (!messageText.trim()) {
-      alert('Please re-enter your verification code');
+      Alert.alert('Please re-enter your verification code');
       return;
     }
     if (messageText != 'playgg') {
-      alert('Incorrect. Please try again');
+      Alert.alert('Incorrect. Please try again');
       return;
 
     }
