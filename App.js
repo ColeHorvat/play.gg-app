@@ -2,10 +2,10 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Dashboard from './screens/Dashboard'
-import EmailSignUpView1 from '.screens/EmailSignUpScreen1';
-import EmailSignUpView2 from '.screens/EmailSignUpScreen2';
-import EmailSignUpView3 from '.screens/EmailSignUpScreen3';
-import EmailSigninView1 from '.screens/EmailSignInScreen1';
+import EmailSignUpView1 from './screens/EmailSignUpScreen1';
+import EmailSignUpView2 from './screens/EmailSignUpScreen2';
+import EmailSignUpView3 from './screens/EmailSignUpScreen3';
+import EmailSigninView1 from './screens/EmailSignInScreen1';
 
 const Stack = createNativeStackNavigator();
 
