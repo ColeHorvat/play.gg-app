@@ -4,11 +4,10 @@ import { StatusBar } from 'expo-status-bar';
 import { t } from 'react-native-tailwindcss';
 
 
-
-
 const Dashboard = ({ navigation }) => {
 
-  const [show, setShow] = useState(false);
+
+const [show, setShow] = useState(false);
 
 
   return (
@@ -19,9 +18,6 @@ const Dashboard = ({ navigation }) => {
         
         <Image style={styles.logo} source={require('../assets/playgg_logo_concept.png')} />
 
-        <View>
-          {show && (<Text>This will be shown when pressed</Text>)}
-        </View>
 
         <TouchableOpacity 
         onPress = {
@@ -36,16 +32,25 @@ const Dashboard = ({ navigation }) => {
         </TouchableOpacity>
 
 			</View> 
+
+      {show && (
+        <View style={styles.profile}>
+          <Text style={styles.nameText}>RabidBlueberry</Text>
+
+          {/* Steam Status Here */}
+          <Text style={styles.statusText}>Online</Text>
+
+          <Text style={styles.platformsText}>Platforms</Text>
+
+          <Text style={styles.platformsText}>Friends</Text>
+
+         
+
+        </View>)}
     </View>
 
   )
 }
-
-
-
-
-
-
 
 
 
@@ -76,7 +81,17 @@ export default Dashboard
     
    },
 
-   headerNameText: {
+
+   profile:{
+    alignSelf: 'flex-end',
+    alignItems:'center',
+    backgroundColor:'#2b222a',
+    height: '100%',
+    width: '75%',
+
+   },
+
+   nameText: {
 		fontSize: 25,
 		fontWeight: 'bold',
 		color: '#D92344',
@@ -84,16 +99,19 @@ export default Dashboard
 		marginBottom: 4
 	},
 
-	headerPlayingText: {
-		fontSize: 18,
+  statusText: {
+		fontSize: 20,
 		fontWeight: 'bold',
-		color: '#076600'
+		color: '#076600',
+		marginTop: 2,
+		marginBottom: 4
 	},
 
-	headerGameText: {
-		fontSize: 18,
+  platformsText: {
+		fontSize: 25,
 		fontWeight: 'bold',
-		color: '#FFFFFF'
-	}
-  
+		color: '#D92344',
+		marginTop: 10,
+		marginBottom: 10
+	},
 });
