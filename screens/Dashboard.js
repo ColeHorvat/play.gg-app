@@ -4,7 +4,6 @@ import { StatusBar } from 'expo-status-bar';
 import { t } from 'react-native-tailwindcss';
 import ProfilePicture from 'react-native-profile-picture'
 
-
 const Dashboard = ({ navigation }) => {
 
 	const [show, setShow] = useState(false);
