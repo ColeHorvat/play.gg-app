@@ -51,6 +51,20 @@ const Dashboard = ({ navigation }) => {
 							<View>
 								<Text style={styles.platformsText}>Platforms</Text>
 							</View>
+							<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 10 }}>
+								<ProfilePicture
+									width={40}
+									height={40}
+									requirePicture={require('../assets/steam_logo.png')}
+									isPicture={true}
+								/>
+								<View>
+								<Text style={[styles.nameText, {color: 'white', fontSize: 20, marginBottom: 0}]}>  Steam</Text>
+								<Text style={[styles.nameText, {fontSize: 16, marginTop: 0} ]}>   Rab1dBlueberry</Text>
+							</View>
+								
+							</View>
+							
 						</View>
 
 						<View style={{ alignItems: 'center', borderTopWidth: .5, borderTopColor: '#707070'}}>
@@ -63,7 +77,6 @@ const Dashboard = ({ navigation }) => {
 									height={50}
 									requirePicture={require('../assets/avatar.jpg')}
 									isPicture={true}
-									user="RabidBlueberry"
 								/>
 								<Text style={styles.nameText}>   SirPancakes</Text>
 							</View>
