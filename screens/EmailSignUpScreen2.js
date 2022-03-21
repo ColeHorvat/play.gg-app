@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react'
 import { TextInput, Button, Image, Text, View, ImageBackground, StyleSheet, Pressable, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants'
@@ -10,6 +10,25 @@ import Icon from 'react-native-vector-icons/Feather'
 const EmailSignUp2 = ({ navigation }) => {
 
   const [text, onChangeText] = React.useState("Text");
+  const [messageText, setMessageText] = useState('');
+
+  const checkTextInput = () => {
+    
+    
+    if (!messageText.trim()) {
+      alert('Please re-enter your verification code');
+      return;
+    }
+    if (messageText != 'playgg') {
+      alert('Incorrect. Please try again');
+      return;
+
+    }
+    
+    //Move to next page
+    navigation.navigate('EmailSignUp3')
+  };
+
 
   return (
     /* CONTAINER  */
@@ -17,19 +36,16 @@ const EmailSignUp2 = ({ navigation }) => {
       <StatusBar style='light' />
       <ImageBackground source={require('./assets/background_1.png')} resizeMode='stretch' style={styles.backgroundImage}>
 
-        <View style={styles.header}>
-          <Button style={styles.backButton} title="Go back" onPress={() => navigation.navigate('MainLoginScreen')} />
-          <Text style={styles.buttonText}>Check out your email inbox for a verification code</Text>
-        </View>
+          
 
         <View style={styles.infoMenu}>
 
 
-          <Text style={styles.buttonText}>Enter code:</Text>
+          <Text style={styles.buttonText}>Check your email for your code</Text>
 
           <TextInput
             style={styles.input}
-            onChangeText={onChangeText}
+            onChangeText={value => setMessageText(value)}
             textAlign={'center'}
             placeholder="Enter verification code"
             autoCapitalize='none'
@@ -44,9 +60,10 @@ const EmailSignUp2 = ({ navigation }) => {
 
 
         <View style={styles.signInMenu}>
-          <Pressable style={styles.nextButton} onPress={() => navigation.navigate('EmailSignUp3')}>
+          <Pressable style={styles.nextButton} onPress={checkTextInput}>
             <Text style={styles.buttonText}>Next</Text>
           </Pressable>
+          <Button style={styles.backButton} title="Go back" onPress={() => navigation.navigate('MainLoginScreen')} />
         </View>
 
       </ImageBackground>
@@ -67,14 +84,7 @@ const styles = StyleSheet.create({
     height: '100%',
 
   },
-  header: {
-    height: 85,
-    width: '100%',
-    flexDirection: 'column',
-    marginTop: 75,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
   infoMenu: {
     height: 350,
     marginRight: 40,
@@ -113,6 +123,7 @@ const styles = StyleSheet.create({
 
 
 
+
   },
 
 
@@ -124,6 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#73172F',
     marginTop: 20,
+    marginBottom: 20,
   },
 
 
