@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image, LogBox } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/Feather'
@@ -23,7 +23,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 { /* MESSAGING PAGE */}
 
 const Messaging = ({ navigation, route }) => {
-
+	LogBox.ignoreAllLogs()
 	const [messageData, setMessageData] = useState([]);
 	const [messageText, setMessageText] = useState('');
 	const [inviteActive, setInviteActive] = useState(false);

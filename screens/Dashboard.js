@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, Button, Image, TouchableOpacity, ScrollView, Pressabble } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, LogBox } from 'react-native';
 import { StatusBar } from 'expo-status-bar'
 import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
@@ -13,6 +13,7 @@ const Dashboard = ({ navigation }) => {
 	const RB_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=' + RB_STEAMID;
 	const BASE_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=';
 	
+	LogBox.ignoreAllLogs()
 	const [showProfile, setShowProfile] = useState(false);
 	const [didLoad, setDidLoad] = useState(false);
 	const [friends, setFriends] = useState([ 
@@ -25,7 +26,6 @@ const Dashboard = ({ navigation }) => {
 			menuButtonPressed: false
 		},
 	]);
-
 	function getSteamInfo() {
 			friends.map((friend, i) => {
 				fetch(BASE_URL + friend.SteamID)
