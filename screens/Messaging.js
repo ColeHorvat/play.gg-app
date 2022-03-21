@@ -199,7 +199,7 @@ const Messaging = ({ navigation, route }) => {
 
 		function sendInviteMessage() {
 
-			const INVITE_MESSAGE = "INVITE\n\nTitle: " + currentTitleValue + "\n\nDate: " + inviteDateText + "\nStart time: " + inviteStartTimeText + "\nEnd time: " + inviteEndTimeText + "\nLink: <Google Calendar Link>"
+			const INVITE_MESSAGE = "INVITE\n\nTitle: " + currentTitleValue + "\n\nDate: " + inviteDateText + "\nStart time: 16:30 \nEnd time: 18:30 \nLink: <Google Calendar Link>"
 			setMessageData([...messageData, {method: 'send', content: INVITE_MESSAGE }])
 		}
 
@@ -247,8 +247,9 @@ const Messaging = ({ navigation, route }) => {
 						<TextInput
 							onPressIn={ showStartTimepicker } 
 							style={[styles.inviteMessageInput]}
-							value={ startTime }
+							value={ '16:30' }
 							onChangeText={ onChange }
+							editable={ false }
 						/>
 					</View>
 				
@@ -257,8 +258,9 @@ const Messaging = ({ navigation, route }) => {
 						<TextInput
 							onPressIn={ showEndTimepicker } 
 							style={[styles.inviteMessageInput]}
-							value={ endTime }
+							value={ '18:30' }
 							onChangeText={ onChange }
+							editable={false}
 						/>
 					</View>
 
