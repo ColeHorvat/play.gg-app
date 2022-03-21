@@ -17,15 +17,15 @@ const EmailSignIn1 = ({ navigation }) => {
     
     //Check for the Email TextInput
     if (!email.trim()) {
-      alert('Please enter the email associated with your account.');
+      Alert.alert('Please enter the email associated with your account.');
       return;
     }
     if (!password.trim()) {
-      alert('Please enter the password associated with your account.');
+      Alert.alert('Please enter the password associated with your account.');
       return;
     }
-    // replace with navigation to home screen
-    alert('You are logged in')
+    // replace with navigation
+    Alert.alert('You are logged in')
   };
 
 
@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#211626',
     marginTop: 20,
+    marginBottom: 20,
   },
 
 
