@@ -12,16 +12,25 @@ const EmailSignUp1 = ({ navigation }) => {
   const [text, onChangeText] = React.useState("Text");
   const [messageText, setMessageText] = useState('');
 
+  const checkTextInput = () => {
+    
+    //Check for the Email TextInput
+    if (!messageText.trim()) {
+      alert('Please Enter Email');
+      return;
+    }
+    //Checked Successfully
+    //Move to next page
+    navigation.navigate('EmailSignUp2')
+  };
+
+
   return (
     /* CONTAINER  */
     <View style={styles.container}>
       <StatusBar style='light' />
       <ImageBackground source={require('./assets/background_1.png')} resizeMode = 'stretch' style={styles.backgroundImage}>
-
-      <View style={styles.header}>
-      <Button style={styles.backButton} title="Go back" onPress={() => navigation.goBack()} /> 
-     
-      </View>
+   
 
       <View style={styles.infoMenu}>
 
@@ -29,8 +38,7 @@ const EmailSignUp1 = ({ navigation }) => {
 
         <TextInput
           style={styles.input}
-          onChangeText={messageText => setMessageText(messageText)}
-					defaultValue={messageText}
+          onChangeText={value => setMessageText(value)}
           textAlign={'center'}
           placeholder="Enter your email address"
           autoCapitalize='none'
@@ -45,9 +53,10 @@ const EmailSignUp1 = ({ navigation }) => {
 
 
       <View style={styles.signInMenu}>
-        <Pressable style={styles.nextButton} onPress={checkText}>
+        <Pressable style={styles.nextButton} onPress={checkTextInput}>
           <Text style={styles.buttonText}>Next</Text>
         </Pressable>
+        <Button style={styles.backButton} title="Go back" onPress={() => navigation.goBack()} /> 
       </View>
       </ImageBackground>
     </View>
@@ -56,12 +65,6 @@ const EmailSignUp1 = ({ navigation }) => {
 
 };
 
-function checkText() {
-  if(messageText == '') {
-    alert("Please enter!");
-
-  }
-}
 
 const styles = StyleSheet.create({
 
@@ -74,14 +77,8 @@ const styles = StyleSheet.create({
     height: '100%',
 
   },
-  header: {
-    height: 85,
-    width: '100%',
-    flexDirection: 'column',
-    marginTop: 75,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
+
   infoMenu: {
     height: 350,
     marginRight: 40,
@@ -130,6 +127,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#73172F',
     marginTop: 20,
+    marginBottom: 20,
   },
 
 
