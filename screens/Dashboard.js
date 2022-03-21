@@ -36,7 +36,6 @@ const Dashboard = ({ navigation }) => {
 				.then(player => {
 					
 					let updatedFriends = [...friends]
-					console.log(updatedFriends + i)
 					updatedFriends[i].name = player['personaname']
 					updatedFriends[i].status = player['personastate'];
 					if(player['gameextrainfo'])

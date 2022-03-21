@@ -58,7 +58,6 @@ const Messaging = ({ navigation, route }) => {
 
 	return (
 		<View style={ [ styles.container ]}>
-			{ console.log(show) }
 			<StatusBar style="light" />
 			{/* HEADER */}
 			<View style={styles.header}>
@@ -173,17 +172,14 @@ const Messaging = ({ navigation, route }) => {
 			if(mode === 'date') {
 				const currentDate = selectedDate;
 				setShow(Platform.ios);
-				console.log('Title: ' + inviteTitleText)
 				setDate(currentDate);
 				setInviteDateText(currentDate.toLocaleDateString())
-				console.log(currentDate.toLocaleDateString())
 			} else {
 				if(timeMode === 'start') {
 					const currentStartTime = selectedDate || startTime;
 					setShow(Platform.ios);
 					setStartTime(currentStartTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""));
 					setInviteStartTimeText(currentStartTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""))
-					console.log(startTime)
 
 				} else if(timeMode === 'end') {
 					const currentEndTime = selectedDate || endTime;
@@ -191,7 +187,6 @@ const Messaging = ({ navigation, route }) => {
 					setEndTime(currentEndTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""));
 
 					setInviteEndTimeText(currentEndTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""))
-					console.log(endTime);
 				}
 			}
 
