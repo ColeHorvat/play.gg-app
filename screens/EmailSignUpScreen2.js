@@ -50,7 +50,7 @@ const EmailSignUp2 = ({ navigation }) => {
             placeholder="Enter verification code"
             autoCapitalize='none'
             autoComplete="off"
-            autoCorrect='none'
+            autoCorrect={false}
             selectTextOnFocus={false}
             underlineColor={'transparent'}
           />

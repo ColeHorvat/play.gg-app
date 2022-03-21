@@ -45,9 +45,10 @@ const EmailSignUp3 = ({ navigation }) => {
             textAlign={'center'}
             autoCapitalize='none'
             autoComplete="off"
-            autoCorrect='none'
+            autoCorrect={false}
             selectTextOnFocus={false}
             underlineColor={'transparent'}
+            secureTextEntry={true}
           />
           <Text style={styles.buttonText}>Verify Password</Text>
 
@@ -58,9 +59,10 @@ const EmailSignUp3 = ({ navigation }) => {
             textAlign={'center'}
             autoCapitalize='none'
             autoComplete="off"
-            autoCorrect='none'
+            autoCorrect={false}
             selectTextOnFocus={false}
             underlineColor={'transparent'}
+            secureTextEntry={true}
           />
           <Text style={styles.buttonText}>Passwords must be:</Text>
           <Text style={styles.buttonText}>at least 8 characters</Text>

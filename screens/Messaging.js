@@ -72,7 +72,7 @@ const Messaging = ({ navigation, route }) => {
 					/>
 				</View>
 				<View>
-					<Text style={ styles.headerNameText }>SirPancakes</Text>
+					<Text style={ [styles.headerNameText, { color: 'white' } ] }>SirPancakes</Text>
 					<Text>
 					{route.params.friend.status >= 1 && (
 										<Image 

@@ -43,7 +43,7 @@ const EmailSignUp1 = ({ navigation }) => {
           placeholder="Enter your email address"
           autoCapitalize='none'
           autoComplete="off"
-          autoCorrect='none'
+          autoCorrect={false}
           selectTextOnFocus={false}
           underlineColor={'transparent'}
         />

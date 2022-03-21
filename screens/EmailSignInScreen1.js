@@ -52,7 +52,7 @@ const EmailSignIn1 = ({ navigation }) => {
           placeholder="Enter your email"
           autoCapitalize='none'
           autoComplete="off"
-          autoCorrect='none'
+          autoCorrect={false}
           selectTextOnFocus={false}
           underlineColor={'transparent'}
         />
@@ -65,9 +65,10 @@ const EmailSignIn1 = ({ navigation }) => {
           placeholder="Enter password"
           autoCapitalize='none'
           autoComplete="off"
-          autoCorrect='none'
+          autoCorrect={false}
           selectTextOnFocus={false}
           underlineColor={'transparent'}
+          secureTextEntry={true}
         />
 
 
