@@ -238,6 +238,7 @@ const Messaging = ({ navigation, route }) => {
 						value={ date.toLocaleDateString() }
 						onChangeText={ onChange }
 						defaultValue={ date }
+						editable={ false }
 					/>
 				</View>
 
