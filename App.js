@@ -18,9 +18,9 @@ export default function App() {
 			/>
 
 			<Stack.Screen
-				name="YourProfile"
+				name="Messaging"
 				component={YourProfile}
-				options={{ title: 'YourProfile', headerShown:true }}
+				options={{ title: 'Messaging', headerShown:false }}
 			/>		
 
 

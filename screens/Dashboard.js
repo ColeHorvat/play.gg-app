@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Button, Image, TouchableOpacity, ScrollView, Pr
 import { StatusBar } from 'expo-status-bar'
 import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
+import Icon from 'react-native-vector-icons/Feather'
 
 
 
@@ -20,7 +21,8 @@ const Dashboard = ({ navigation }) => {
 			status: null,
 			gamePlaying: '',
 			SteamID: '76561198124794637',
-			Platform: 'Steam'
+			Platform: 'Steam',
+			menuButtonPressed: false
 		},
 	]);
 
@@ -32,10 +34,6 @@ const Dashboard = ({ navigation }) => {
 					return responseJson['response']['players']['0'];
 				})
 				.then(player => {
-					// friend.name = player['personaname']
-					// friend.status = player['personastate'];
-					// if(player['gameextrainfo'])
-					// 	friend.gamePlaying = player['gameextrainfo']
 					
 					let updatedFriends = [...friends]
 					console.log(updatedFriends + i)
@@ -96,7 +94,8 @@ const Dashboard = ({ navigation }) => {
 
 			<ScrollView>
 				{friends.map(friend => (
-					<TouchableOpacity >
+					<TouchableOpacity 
+					>
 						<View style={ styles.cardContainer }>
 							<View style={ { display: 'flex', flexDirection: 'row', alignSelf:'flex-start', marginLeft: 12, marginTop: 12 } }>
 								<ProfilePicture 
@@ -104,8 +103,7 @@ const Dashboard = ({ navigation }) => {
 									height={75}
 									requirePicture={require('../assets/avatar.jpg')}
 									isPicture={true}
-									user="SirPancakes"
-									URLPicture="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/76/76d6ea598ba63453a9ae8e953096bd00ce478f55.jpg"
+									user="SirPancakes"	
 								/>
 							</View>
 
@@ -128,6 +126,17 @@ const Dashboard = ({ navigation }) => {
 									</Text>
 								</View>
 							</View>
+							<View style={ { position: 'absolute', right:0, top: 50, width : '15%', marginRight: 12} }>
+								<Icon.Button 
+									name='message-square'
+									size={40}
+									backgroundColor="#73172f"
+									onPress={() => navigation.navigate('Messaging')}
+								>
+
+								</Icon.Button>
+							</View>
+
 						</View>
 					</TouchableOpacity>
 				))}
