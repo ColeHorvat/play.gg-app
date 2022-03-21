@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { StyleSheet, Text, View, ScrollView, TextInput, Platform } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/Feather'
@@ -22,7 +22,7 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 
 { /* MESSAGING PAGE */}
 
-const Messaging = ({ navigation }) => {
+const Messaging = ({ navigation, route }) => {
 
 	const [messageData, setMessageData] = useState([]);
 	const [messageText, setMessageText] = useState('');
@@ -51,9 +51,9 @@ const Messaging = ({ navigation }) => {
 	const messages = messageData.map((message) => {
 		if(message.method === 'send') {
 			return <SMessage content={message.content}/>
+		} else {
+			return <RMessage content={message.content} />
 		}
-	
-		return <RMessage content={message.content} />
 	})
 
 	return (
@@ -69,14 +69,25 @@ const Messaging = ({ navigation }) => {
 						size={40}	 
 						color='white'
 						backgroundColor='#73172F'
+						onPress={() => navigation.navigate('Dashboard')}
 					/>
 				</View>
 				<View>
 					<Text style={ styles.headerNameText }>SirPancakes</Text>
 					<Text>
-						<Text style={ styles.headerPlayingText }>Playing:</Text>
-						{/* IMAGE HERE */} 
-						<Text style={ styles.headerGameText }> Halo Infinite</Text>
+					{route.params.friend.status >= 1 && (
+										<Image 
+											source={require('../assets/steam_logo.png')}
+											style = { {width: 20, height: 20} }
+										/>
+					)}
+					<Text style={ [styles.headerNameText, {color: 'white', fontSize: 16}] }> {route.params.friend.gamePlaying != '' ? "Playing: " + route.params.friend.gamePlaying : ''} 
+							<Text style={ [styles.headerNameText, {color: 'white', fontSize: 16}]}>
+								{
+									StatusText(route.params.friend)
+								}	
+							</Text> 
+						</Text>
 					</Text>
 				</View>
 			</View>
@@ -325,6 +336,29 @@ const Messaging = ({ navigation }) => {
 
 	function addInviteFriend(friendName) {
 		setAddedFriends(...addedFriends, generatefriendName )
+	}
+
+	function StatusText(friend) {
+		if(friend.gamePlaying === '') {
+			switch(friend.status) {
+				case 0:
+					return 'Offline'
+				case 1:
+					return 'Online'
+				case 2:
+					return 'Busy'
+				case 3:
+					return 'Away'
+				case 4: 
+					return 'Snooze'
+				case 5:
+					return 'Online'
+				case 6:
+					return 'Online'
+				default:
+					return 'Loading...'
+			}
+		}
 	}
 }
 

@@ -207,7 +207,7 @@ const Dashboard = ({ navigation }) => {
 									name='message-square'
 									size={40}
 									backgroundColor="#73172f"
-									onPress={() => navigation.navigate('Messaging')}
+									onPress={() => navigation.navigate('Messaging', { friend: friend })}
 								>
 
 								</Icon.Button>
