@@ -270,6 +270,7 @@ const Messaging = ({ navigation, route }) => {
 							is24Hour={true}
 							display="spinner"
 							onChange={onChange}
+							style={{backgroundColor: 'white'}}
 						/>
 					)} 
 					
