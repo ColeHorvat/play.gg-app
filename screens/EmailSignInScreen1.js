@@ -7,21 +7,25 @@ import Icon from 'react-native-vector-icons/Feather'
 
 
 
-const EmailSignUp1 = ({ navigation }) => {
+const EmailSignIn1 = ({ navigation }) => {
 
   const [text, onChangeText] = React.useState("Text");
-  const [messageText, setMessageText] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const checkTextInput = () => {
     
     //Check for the Email TextInput
-    if (!messageText.trim()) {
-      alert('Please Enter Email');
+    if (!email.trim()) {
+      alert('Please enter the email associated with your account.');
       return;
     }
-    //Checked Successfully
-    //Move to next page
-    navigation.navigate('EmailSignUp2')
+    if (!password.trim()) {
+      alert('Please enter the password associated with your account.');
+      return;
+    }
+    // replace with navigation to home screen
+    alert('You are logged in')
   };
 
 
@@ -29,8 +33,13 @@ const EmailSignUp1 = ({ navigation }) => {
     /* CONTAINER  */
     <View style={styles.container}>
       <StatusBar style='light' />
-      <ImageBackground source={require('./assets/background_1.png')} resizeMode = 'stretch' style={styles.backgroundImage}>
-   
+      <View style={styles.header}>
+       
+        <Image
+          source={require('./assets/playgg_logo_concept_text.png')}
+          style={styles.icon}
+        />
+      </View>
 
       <View style={styles.infoMenu}>
 
@@ -38,9 +47,22 @@ const EmailSignUp1 = ({ navigation }) => {
 
         <TextInput
           style={styles.input}
-          onChangeText={value => setMessageText(value)}
+          onChangeText={value => setEmail(value)}
           textAlign={'center'}
-          placeholder="Enter your email address"
+          placeholder="Enter your email"
+          autoCapitalize='none'
+          autoComplete="off"
+          autoCorrect='none'
+          selectTextOnFocus={false}
+          underlineColor={'transparent'}
+        />
+        <Text style={styles.buttonText}>Password</Text>
+
+        <TextInput
+          style={styles.input}
+          onChangeText={value => setPassword(value)}
+          textAlign={'center'}
+          placeholder="Enter password"
           autoCapitalize='none'
           autoComplete="off"
           autoCorrect='none'
@@ -53,38 +75,41 @@ const EmailSignUp1 = ({ navigation }) => {
 
 
       <View style={styles.signInMenu}>
-        <Pressable style={styles.nextButton} onPress={checkTextInput}>
-          <Text style={styles.buttonText}>Next</Text>
+        <Pressable style={styles.signInButton} onPress={checkTextInput}>
+          <Text style={styles.buttonText}>Sign in</Text>
         </Pressable>
-        <Button style={styles.backButton} title="Go back" onPress={() => navigation.goBack()} /> 
+        <Button style={styles.backButton} title="Go back" onPress={() => navigation.navigate('MainLoginScreen')} />
       </View>
-      </ImageBackground>
+
+
     </View>
   );
 
 
 };
 
-
 const styles = StyleSheet.create({
 
   container: {
     height: '100%',
+    backgroundColor: '#73172F',
 
   },
-  backgroundImage: {
-    justifyContent: "center",
-    height: '100%',
-
+  header: {
+    height: 85,
+    width: '100%',
+    flexDirection: 'column',
+    marginTop: 75,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  
-
   infoMenu: {
     height: 350,
     marginRight: 40,
     marginLeft: 40,
     marginTop: 75,
     padding: 30,
+    backgroundColor: '#211626',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
@@ -95,6 +120,7 @@ const styles = StyleSheet.create({
     padding: 30,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
     marginTop: 20,
 
   },
@@ -105,7 +131,7 @@ const styles = StyleSheet.create({
     height: 75,
 
   },
- 
+
   backButton: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -114,20 +140,19 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: '#211626',
     marginTop: 20,
-    
+
 
   },
 
 
-  nextButton: {
+  signInButton: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
     paddingHorizontal: 50,
     borderRadius: 20,
-    backgroundColor: '#73172F',
+    backgroundColor: '#211626',
     marginTop: 20,
-    marginBottom: 20,
   },
 
 
@@ -140,7 +165,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
 
   },
-  
+
+
+
+
   buttonText: {
     fontSize: 16,
     lineHeight: 21,
@@ -152,4 +180,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default EmailSignUp1;
+export default EmailSignIn1;
