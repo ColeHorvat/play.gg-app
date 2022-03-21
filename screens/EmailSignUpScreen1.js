@@ -16,7 +16,7 @@ const EmailSignUp1 = ({ navigation }) => {
     
     //Check for the Email TextInput
     if (!messageText.trim()) {
-      alert('Please Enter Email');
+      Alert.alert('Please enter Email');
       return;
     }
     //Checked Successfully
