@@ -15,11 +15,11 @@ const EmailSignUp3 = ({ navigation }) => {
 
   const checkTextInput = () => {
     if (password1 != password2) {
-      alert('Please make sure your passwords match.');
+      Alert.alert('Please make sure your passwords match.');
       return;
     }
     if(password2.length < 8) {
-      alert('Please enter a password with at least 8 characters')
+      Alert.alert('Please enter a password with at least 8 characters')
       return;
     }
     //Move to next page
