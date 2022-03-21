@@ -1,9 +1,16 @@
-import React from 'react'
-import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
+import React, {useState} from 'react'
+import { Text, View, StyleSheet, Button, Image, TouchableOpacity,  } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { t } from 'react-native-tailwindcss';
 
+
+
+
 const Dashboard = ({ navigation }) => {
+
+  const [show, setShow] = useState(false);
+
+
   return (
     <View style={styles.container}>
 
@@ -12,20 +19,36 @@ const Dashboard = ({ navigation }) => {
         
         <Image style={styles.logo} source={require('../assets/playgg_logo_concept.png')} />
 
-        
+        <View>
+          {show && (<Text>This will be shown when pressed</Text>)}
+        </View>
 
-        <TouchableOpacity onPress = {() => navigation.navigate('YourProfile', {name: 'YourProfile'})}>
+        <TouchableOpacity 
+        onPress = {
+          () => 
+          
+          {setShow(!show)}
+
+          }>
+
             <Image style={styles.menuLogo} source={require('../assets/hamburger_icon.png')} />
+
         </TouchableOpacity>
 
 			</View> 
     </View>
 
-    
-
-    
   )
 }
+
+
+
+
+
+
+
+
+
 
 export default Dashboard
 
