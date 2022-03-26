@@ -5,28 +5,31 @@ import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
 import Icon from 'react-native-vector-icons/Feather'
 import FriendRequest from './components/Dashboard/FriendRequest';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 
 const Dashboard = ({ navigation }) => {
 	const API_KEY = '17CB3BD18765C9F04AAB50A3EC9CA2A3'
 	const RB_STEAMID = '76561198114121125';
+	const SP_STEAMID = '76561198124794637'
 	const RB_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=' + RB_STEAMID;
 	const BASE_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=';
 	
 	LogBox.ignoreAllLogs()
 	const [showProfile, setShowProfile] = useState(false);
 	const [didLoad, setDidLoad] = useState(false);
-	const [friends, setFriends] = useState([ 
+	const [friends, setFriends] = useState([
 		{
 			name: '',
 			status: null,
 			gamePlaying: '',
-			SteamID: '76561198124794637',
+			SteamID: SP_STEAMID,
 			Platform: 'Steam',
-			menuButtonPressed: false
-		},
+			show: false
+		}
 	]);
+
 	function getSteamInfo() {
 			friends.map((friend, i) => {
 				fetch(BASE_URL + friend.SteamID)
@@ -48,7 +51,6 @@ const Dashboard = ({ navigation }) => {
 					else 
 						updatedFriends[i].gamePlaying = ''
 					
-					updatedFriends[i].show = false;
 					setFriends(updatedFriends)
 				})
 				.catch(error => {
@@ -66,6 +68,7 @@ const Dashboard = ({ navigation }) => {
 
 		const interval = setInterval(() => {
 			getSteamInfo()
+			// console.log(friends)
 		}, 2000)
 		return () => clearInterval(interval)
 	}, [])
@@ -162,7 +165,13 @@ const Dashboard = ({ navigation }) => {
 
 							</View>
 
-							<FriendRequest />
+							<FriendRequest 
+								steamID = {'76561198124794637'}
+								setFriends = {setFriends}
+								friends = {friends}
+								// getFriendData={getFriendData}
+								// storeFriendData={storeFriendData}
+							/>
 						</View>
 
 
@@ -247,6 +256,29 @@ const Dashboard = ({ navigation }) => {
 			}
 		}
 	}
+
+    // const getFriendData = async () => {
+    //     try {
+    //         return await AsyncStorage.getItem('Friends')
+    //     } catch(err) {
+    //         console.error(err)
+    //     }
+    // }
+
+    // const storeFriendData = async (value) => {
+    //     try {
+	// 		await AsyncStorage.clear()
+	// 		if(await AsyncStorage.getItem('Friends') == null) {
+	// 			console.log("HIT")
+	// 			await AsyncStorage.setItem('Friends', JSON.stringify([]))
+	// 		}
+	// 		console.log("HIT2")
+	// 		console.log(await JSON.parse(AsyncStorage.getItem('Friends')))
+    //         // await AsyncStorage.setItem("Friends", value)
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // }
 	
 	
 	// return (
