@@ -155,16 +155,22 @@ const Dashboard = ({ navigation }) => {
 							<View>
 								<Text style={styles.platformsText}>Friends</Text>
 							</View>
-							<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 20 }}>
-								<ProfilePicture
-									width={50}
-									height={50}
-									requirePicture={require('../assets/avatar.jpg')}
-									isPicture={true}
-								/>
-								<Text style={styles.nameText}>   SirPancakes</Text>
+							
 
-							</View>
+							{!showRequest && (		
+								<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 20 }}>
+									<ProfilePicture
+										width={50}
+										height={50}
+										requirePicture={require('../assets/avatar.jpg')}
+										isPicture={true}
+									/>
+									<Text style={styles.nameText}>   SirPancakes</Text>
+								</View>
+							)}
+								
+
+
 							{showRequest && (
 								<FriendRequest 
 									steamID = {'76561198124794637'}

@@ -39,6 +39,7 @@ function FriendRequest(props) {
                 name="x"
                 size={20}
                 color="red"
+                onPress={() => console.log("REJECT REQUEST")}
             />
         </View>
     )
