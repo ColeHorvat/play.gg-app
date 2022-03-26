@@ -18,6 +18,7 @@ const Dashboard = ({ navigation }) => {
 	
 	LogBox.ignoreAllLogs()
 	const [showProfile, setShowProfile] = useState(false);
+	const [showRequest, setShowRequest] = useState(true);
 	const [didLoad, setDidLoad] = useState(false);
 	const [friends, setFriends] = useState([
 		{
@@ -164,14 +165,15 @@ const Dashboard = ({ navigation }) => {
 								<Text style={styles.nameText}>   SirPancakes</Text>
 
 							</View>
+							{showRequest && (
+								<FriendRequest 
+									steamID = {'76561198124794637'}
+									setFriends = {setFriends}
+									friends = {friends}
+									setShowRequest={setShowRequest}
+								/>
+							)}
 
-							<FriendRequest 
-								steamID = {'76561198124794637'}
-								setFriends = {setFriends}
-								friends = {friends}
-								// getFriendData={getFriendData}
-								// storeFriendData={storeFriendData}
-							/>
 						</View>
 
 

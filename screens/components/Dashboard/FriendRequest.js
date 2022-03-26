@@ -10,6 +10,7 @@ function FriendRequest(props) {
         
 
         props.friends[0].show = true
+        props.setShowRequest(false)
         // props.setFriends(props.friends.concat(FRIEND))
         console.log(props.friends)
     }
