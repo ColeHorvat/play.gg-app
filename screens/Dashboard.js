@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar'
 import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
 import Icon from 'react-native-vector-icons/Feather'
+import FriendRequest from './components/Dashboard/FriendRequest';
 
 
 
@@ -47,6 +48,7 @@ const Dashboard = ({ navigation }) => {
 					else 
 						updatedFriends[i].gamePlaying = ''
 					
+					updatedFriends[i].show = false;
 					setFriends(updatedFriends)
 				})
 				.catch(error => {
@@ -157,7 +159,10 @@ const Dashboard = ({ navigation }) => {
 									isPicture={true}
 								/>
 								<Text style={styles.nameText}>   SirPancakes</Text>
+
 							</View>
+
+							<FriendRequest />
 						</View>
 
 
@@ -168,7 +173,7 @@ const Dashboard = ({ navigation }) => {
 
 
 			<ScrollView>
-				{friends.map(friend => (
+				{friends.filter(friends => friends.show).map(friend => (
 					<TouchableOpacity 
 					>
 						<View style={ styles.cardContainer }>
