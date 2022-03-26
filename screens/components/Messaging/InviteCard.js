@@ -69,6 +69,7 @@ export default function InviteCard(props) {
 
         const INVITE_MESSAGE = "INVITE\n\nTitle: " + title + "\n\nDate: " + inviteDateText + "\nStart time: " + inviteStartTimeText + "\nEnd time: " + inviteEndTimeText + "\nLink: <Google Calendar Link>"
         props.setMessageData([...props.messageData, {method: 'send', content: INVITE_MESSAGE }])
+		props.toggleInvite();
     }
 
     return (
