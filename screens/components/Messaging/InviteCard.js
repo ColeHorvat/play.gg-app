@@ -109,6 +109,7 @@ export default function InviteCard(props) {
                     value={ date.toLocaleDateString() }
                     onChangeText={ onChange }
                     defaultValue={ date }
+					editable={ true }
                 />
             </View>
 
@@ -139,7 +140,7 @@ export default function InviteCard(props) {
                         value={date}
                         mode={mode}
                         is24Hour={true}
-                        display="default"
+                        display="spinner"
                         onChange={onChange}
                         style={{backgroundColor: 'white'}}
                     />
