@@ -8,15 +8,9 @@ function FriendRequest(props) {
 
     async function addFriend() {
         
-
         props.friends[0].show = true
         props.setShowRequest(false)
-        // props.setFriends(props.friends.concat(FRIEND))
-        console.log(props.friends)
     }
-
-
-
 
     return (
         <View style={{ backgroundColor: 'rgba(33, 22, 38, 75)', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 10, borderRadius: 10 }}>
@@ -66,7 +60,6 @@ const styles = StyleSheet.create({
 		height: 50,
 
 	},
-
 
 	menuLogoContainer: {
 		alignItems: 'center',

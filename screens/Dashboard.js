@@ -19,6 +19,7 @@ const Dashboard = ({ navigation }) => {
 	LogBox.ignoreAllLogs()
 	const [showProfile, setShowProfile] = useState(false);
 	const [showRequest, setShowRequest] = useState(true);
+	const [showPlatform, setShowPlatform] = useState(false);
 	const [didLoad, setDidLoad] = useState(false);
 	const [friends, setFriends] = useState([
 		{
@@ -135,21 +136,31 @@ const Dashboard = ({ navigation }) => {
 							<View>
 								<Text style={styles.platformsText}>Platforms</Text>
 							</View>
-							<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 10 }}>
-								<ProfilePicture
-									width={40}
-									height={40}
-									requirePicture={require('../assets/steam_logo.png')}
-									isPicture={true}
-								/>
-								<View>
-								<Text style={[styles.nameText, {color: 'white', fontSize: 20, marginBottom: 0}]}>  Steam</Text>
-								<Text style={[styles.nameText, {fontSize: 16, marginTop: 0} ]}>   Rab1dBlueberry</Text>
-							</View>
-								
-							</View>
-							
+							{showPlatform && (
+								<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 10 }}>
+									<ProfilePicture
+										width={40}
+										height={40}
+										requirePicture={require('../assets/steam_logo.png')}
+										isPicture={true}
+									/>
+									<View>
+										<Text style={[styles.nameText, {color: 'white', fontSize: 20, marginBottom: 0}]}>  Steam</Text>
+										<Text style={[styles.nameText, {fontSize: 16, marginTop: 0} ]}>   Rab1dBlueberry</Text>
+									</View>
+								</View>
+							)}
+
+							{!showPlatform && (
+								<View style={{padding: 5}}>
+									<Text style={{fontSize: 16, color: 'white'}}>No platform linked</Text>
+								</View>
+							)}
+
 						</View>
+						
+							
+							
 
 						<View style={{ alignItems: 'center', borderTopWidth: .5, borderTopColor: '#707070'}}>
 							<View>
