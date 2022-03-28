@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/Feather'
 
 
 
+
+
 const EmailSignIn1 = ({ navigation }) => {
 
   const [text, onChangeText] = React.useState("Text");
@@ -27,6 +29,8 @@ const EmailSignIn1 = ({ navigation }) => {
     // replace with navigation
     navigation.navigate('Dashboard');
   };
+
+
 
 
   return (
