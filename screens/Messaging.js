@@ -3,31 +3,23 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image, LogBox 
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/Feather'
-import DateTimePicker from '@react-native-community/datetimepicker'
+import InviteCard from './components/Messaging/InviteCard'
 
 { /* MESSAGING PAGE */}
 
 const Messaging = ({ navigation, route }) => {
-	LogBox.ignoreAllLogs()
+	// LogBox.ignoreAllLogs()
 	const [messageData, setMessageData] = useState([]);
 	const [messageText, setMessageText] = useState('');
 	const [inviteActive, setInviteActive] = useState(false);
 	const [addedFriends, setAddedFriends] = useState([]);
 
-	const [date, setDate] = useState(new Date());
-	const [startTime, setStartTime] = useState(new Date())
-	const [endTime, setEndTime] = useState(new Date())
-	const [mode, setMode] = useState('date');
-	const [show, setShow] = useState(false);
-	const [timeMode, setTimeMode] = useState('start');
+
 	
 	const scrollView = useRef(null);
 	const textInput = useRef(null);
 
-	const [inviteTitleText, setInviteTitleText] = useState(''); 
-	const [inviteDateText, setInviteDateText] = useState('');
-	const [inviteStartTimeText, setInviteStartTimeText] = useState('');
-	const [inviteEndTimeText, setInviteEndTimeText] = useState('');
+
 
 	const FRIENDS = {
 		"1":"SirPancakes"
@@ -122,7 +114,11 @@ const Messaging = ({ navigation, route }) => {
 
 			{inviteActive && (
 
-				<InviteCard />
+				<InviteCard 
+					setMessageData={setMessageData}
+					toggleInvite={toggleInvite}
+					messageData={messageData}
+				/>
 			)}
 		</View>
 	)
@@ -141,155 +137,6 @@ const Messaging = ({ navigation, route }) => {
 		return (
 			<View style = { [styles.balloon, styles.itemOut, { backgroundColor: "#B1132F" }]}>
 				<Text style = { {paddingTop: 5, color: 'white'} }>{ props.content }</Text>
-			</View>
-		)
-	}
-
-	{ /* INVITE COMPONENTS */}
-
-	function InviteCard(props) {
-
-		// DATE PICKER STATES & FUNCTIONS
-		const [currentTitleValue, setCurrentTitleValue] = useState('')
-
-
-		const onChange = (event, selectedDate) => {
-			if(mode === 'date') {
-				const currentDate = selectedDate;
-				setShow(Platform.ios);
-				setDate(currentDate);
-				setInviteDateText(currentDate.toLocaleDateString())
-			} else {
-				if(timeMode === 'start') {
-					const currentStartTime = selectedDate || startTime;
-					setShow(Platform.ios);
-					setStartTime(currentStartTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""));
-					setInviteStartTimeText(currentStartTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""))
-
-				} else if(timeMode === 'end') {
-					const currentEndTime = selectedDate || endTime;
-					setShow(Platform.ios);
-					setEndTime(currentEndTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""));
-
-					setInviteEndTimeText(currentEndTime.toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'}).replace(/(:\d{2}| [AP]M)$/, ""))
-				}
-			}
-
-			
-		}
-
-		const showMode = (currentMode) => {
-			setShow(true)
-			setMode(currentMode)
-		}
-
-		const showDatepicker = () => { 
-			showMode('date');
-		}
-
-		const showStartTimepicker = () => {
-			setTimeMode('start')
-			showMode('time');
-		}
-
-		const showEndTimepicker = () => {
-			setTimeMode('end')
-			showMode('time')
-		}
-
-		function sendInviteMessage() {
-
-			const INVITE_MESSAGE = "INVITE\n\nTitle: " + currentTitleValue + "\n\nDate: " + inviteDateText + "\nStart time: 16:30 \nEnd time: 18:30 \nLink: <Google Calendar Link>"
-			setMessageData([...messageData, {method: 'send', content: INVITE_MESSAGE }])
-		}
-
-		return (
-			<View style = { [styles.inviteContainer] }>
-				<View style = { [styles.header, { backgroundColor: '#2B222E', alignItems: 'center', justifyContent: 'center'}]}>
-					<View style = { [{ alignSelf: 'flex-start', position: 'absolute', left: 0}]}>
-						<Icon.Button 
-							name="x"
-							style={ [styles.icon, { alignSelf: 'flex-start'}] }
-							size={30}	 
-							color='white'
-							backgroundColor='#2B222E'
-							onPress={ toggleInvite }
-						/>
-					</View>
-									
-
-					<Text style ={[ styles.headerNameText, {} ]}>Create An Invite</Text>
-				</View>
-
-				<View style={[ {marginBottom: 20}]}>
-					<TextInput 
-						style={ [styles.inviteMessageInput, { marginTop: 12}]}
-						placeholder="Title"
-						placeholderTextColor='white'
-						//onSubmitEnding={ v => setInviteTitleText(v) }
-						defaultValue={ inviteTitleText }
-					/>
-
-					<TextInput
-						onPressIn={ showDatepicker }
-						style={ [styles.inviteMessageInput]}
-						placeholder='Date'
-						placeholderTextColor='white'
-						value={ date.toLocaleDateString() }
-						onChangeText={ onChange }
-						defaultValue={ date }
-						editable={ false }
-					/>
-				</View>
-
-				<View>
-					<View style={ [ { flexDirection: 'row' } ]}>
-						<Text style={ [ {marginTop: 18, fontSize: 18, color: 'white', marginLeft: 10 }]}> Start:</Text>
-						<TextInput
-							onPressIn={ showStartTimepicker } 
-							style={[styles.inviteMessageInput]}
-							value={ '16:30' }
-							onChangeText={ onChange }
-							editable={ false }
-						/>
-					</View>
-				
-					<View style={ { flexDirection: 'row'} }>
-						<Text style={ [ { marginTop: 18, fontSize: 18, color: 'white', marginLeft: 10} ]}> End:</Text>
-						<TextInput
-							onPressIn={ showEndTimepicker } 
-							style={[styles.inviteMessageInput]}
-							value={ '18:30' }
-							onChangeText={ onChange }
-							editable={false}
-						/>
-					</View>
-
-					{show && (
-						<DateTimePicker 
-							testID="dateTimePicker"
-							value={date}
-							mode={mode}
-							is24Hour={true}
-							display="spinner"
-							onChange={onChange}
-							style={{backgroundColor: 'white'}}
-						/>
-					)} 
-					
-				</View>
-
-				<View style = { [ styles.inviteSendContainer ] }>
-					<View style = { [ styles.inviteSendButton ]}>
-						<Icon.Button 
-							name="send"
-							color="#D92344"
-							backgroundColor="#211626"
-							onPress={ sendInviteMessage }
-						/>
-					</View>
-				</View>
-				
 			</View>
 		)
 	}
@@ -360,7 +207,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#211626',
 	},
 	header: {
-		height: 85,
+		height: '10%',
 		width: '100%',
 		backgroundColor: '#73172F',
 		marginTop: Constants.statusBarHeight,
