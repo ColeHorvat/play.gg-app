@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#211626',
 	},
 	header: {
-		height: 85,
+		height: '10%',
 		width: '100%',
 		backgroundColor: '#73172F',
 		marginTop: Constants.statusBarHeight,

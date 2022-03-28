@@ -4,28 +4,34 @@ import { StatusBar } from 'expo-status-bar'
 import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
 import Icon from 'react-native-vector-icons/Feather'
+import FriendRequest from './components/Dashboard/FriendRequest';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 
 const Dashboard = ({ navigation }) => {
 	const API_KEY = '17CB3BD18765C9F04AAB50A3EC9CA2A3'
 	const RB_STEAMID = '76561198114121125';
+	const SP_STEAMID = '76561198124794637'
 	const RB_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=' + RB_STEAMID;
 	const BASE_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=';
 	
 	LogBox.ignoreAllLogs()
 	const [showProfile, setShowProfile] = useState(false);
+	const [showRequest, setShowRequest] = useState(true);
+	const [showPlatform, setShowPlatform] = useState(false);
 	const [didLoad, setDidLoad] = useState(false);
-	const [friends, setFriends] = useState([ 
+	const [friends, setFriends] = useState([
 		{
 			name: '',
 			status: null,
 			gamePlaying: '',
-			SteamID: '76561198124794637',
+			SteamID: SP_STEAMID,
 			Platform: 'Steam',
-			menuButtonPressed: false
-		},
+			show: false
+		}
 	]);
+
 	function getSteamInfo() {
 			friends.map((friend, i) => {
 				fetch(BASE_URL + friend.SteamID)
@@ -64,6 +70,7 @@ const Dashboard = ({ navigation }) => {
 
 		const interval = setInterval(() => {
 			getSteamInfo()
+			// console.log(friends)
 		}, 2000)
 		return () => clearInterval(interval)
 	}, [])
@@ -129,35 +136,61 @@ const Dashboard = ({ navigation }) => {
 							<View>
 								<Text style={styles.platformsText}>Platforms</Text>
 							</View>
-							<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 10 }}>
-								<ProfilePicture
-									width={40}
-									height={40}
-									requirePicture={require('../assets/steam_logo.png')}
-									isPicture={true}
-								/>
-								<View>
-								<Text style={[styles.nameText, {color: 'white', fontSize: 20, marginBottom: 0}]}>  Steam</Text>
-								<Text style={[styles.nameText, {fontSize: 16, marginTop: 0} ]}>   Rab1dBlueberry</Text>
-							</View>
-								
-							</View>
-							
+							{showPlatform && (
+								<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 10 }}>
+									<ProfilePicture
+										width={40}
+										height={40}
+										requirePicture={require('../assets/steam_logo.png')}
+										isPicture={true}
+									/>
+									<View>
+										<Text style={[styles.nameText, {color: 'white', fontSize: 20, marginBottom: 0}]}>  Steam</Text>
+										<Text style={[styles.nameText, {fontSize: 16, marginTop: 0} ]}>   Rab1dBlueberry</Text>
+									</View>
+								</View>
+							)}
+
+							{!showPlatform && (
+								<View style={{padding: 5}}>
+									<Text style={{fontSize: 16, color: 'white'}}>No platform linked</Text>
+								</View>
+							)}
+
 						</View>
+						
+							
+							
 
 						<View style={{ alignItems: 'center', borderTopWidth: .5, borderTopColor: '#707070'}}>
 							<View>
 								<Text style={styles.platformsText}>Friends</Text>
 							</View>
-							<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 20 }}>
-								<ProfilePicture
-									width={50}
-									height={50}
-									requirePicture={require('../assets/avatar.jpg')}
-									isPicture={true}
+							
+
+							{!showRequest && (		
+								<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 20 }}>
+									<ProfilePicture
+										width={50}
+										height={50}
+										requirePicture={require('../assets/avatar.jpg')}
+										isPicture={true}
+									/>
+									<Text style={styles.nameText}>   SirPancakes</Text>
+								</View>
+							)}
+								
+
+
+							{showRequest && (
+								<FriendRequest 
+									steamID = {'76561198124794637'}
+									setFriends = {setFriends}
+									friends = {friends}
+									setShowRequest={setShowRequest}
 								/>
-								<Text style={styles.nameText}>   SirPancakes</Text>
-							</View>
+							)}
+
 						</View>
 
 
@@ -168,7 +201,7 @@ const Dashboard = ({ navigation }) => {
 
 
 			<ScrollView>
-				{friends.map(friend => (
+				{friends.filter(friends => friends.show).map(friend => (
 					<TouchableOpacity 
 					>
 						<View style={ styles.cardContainer }>
@@ -242,6 +275,29 @@ const Dashboard = ({ navigation }) => {
 			}
 		}
 	}
+
+    // const getFriendData = async () => {
+    //     try {
+    //         return await AsyncStorage.getItem('Friends')
+    //     } catch(err) {
+    //         console.error(err)
+    //     }
+    // }
+
+    // const storeFriendData = async (value) => {
+    //     try {
+	// 		await AsyncStorage.clear()
+	// 		if(await AsyncStorage.getItem('Friends') == null) {
+	// 			console.log("HIT")
+	// 			await AsyncStorage.setItem('Friends', JSON.stringify([]))
+	// 		}
+	// 		console.log("HIT2")
+	// 		console.log(await JSON.parse(AsyncStorage.getItem('Friends')))
+    //         // await AsyncStorage.setItem("Friends", value)
+    //     } catch (err) {
+    //         console.error(err)
+    //     }
+    // }
 	
 	
 	// return (
