@@ -131,10 +131,14 @@ const Dashboard = ({ navigation }) => {
 							{/* Steam Status Here */}
 							<Text style={styles.statusText}>Online</Text>
 						</View>
-
+							<Text style={styles.editprofileText} 
+							onPress={() => navigation.navigate('EditProfile')}>
+								 Edit Profile 
+							</Text>
 						<View style={{ alignItems: 'center', borderTopWidth: .5, borderTopColor: '#707070', width: '100%'}}>
 							<View>
 								<Text style={styles.platformsText}>Platforms</Text>
+								
 							</View>
 							{showPlatform && (
 								<View style={{ alignSelf: 'flex-start', flexDirection: 'row', margin: 10 }}>
@@ -385,6 +389,14 @@ const styles = StyleSheet.create({
 		color: '#D92344',
 		marginTop: 10,
 		marginBottom: 10
+	},
+	editprofileText: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		textDecorationLine: 'underline',
+		color: '#D92344',
+		marginTop: 10,
+		marginBottom: 5
 	},
 	cardContainer: {
 		height: 150,
