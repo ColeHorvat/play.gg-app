@@ -7,23 +7,15 @@ import Icon from 'react-native-vector-icons/Feather'
 
 
 
-const EmailSignUp3 = ({ navigation }) => {
+const UsernameCreation = ({ navigation }) => {
 
   const [text, onChangeText] = React.useState("Text");
-  const [password1, setPassword1] = useState('');
-  const [password2, setPassword2] = useState('');
+  const [username, setUsername] = useState('');
+
 
   const checkTextInput = () => {
-    if (password1 != password2) {
-      Alert.alert('Please make sure your passwords match.');
-      return;
-    }
-    if(password2.length < 8) {
-      Alert.alert('Please enter a password with at least 8 characters')
-      return;
-    }
-    //Move to next page
-    navigation.navigate('UsernameCreation')
+    
+    navigation.navigate('EmailSignIn1')
     
   };
 
@@ -36,36 +28,23 @@ const EmailSignUp3 = ({ navigation }) => {
 
 
         <View style={styles.infoMenu}>
-          <Text style={styles.buttonText}>Create Password:</Text>
+          <Text style={styles.buttonText}>Create Username:</Text>
 
           <TextInput
             style={styles.input}
-            onChangeText={value => setPassword1(value)}
-            placeholder="Enter your password"
+            onChangeText={value => setUsername(value)}
+            placeholder="Enter a username"
             textAlign={'center'}
             autoCapitalize='none'
             autoComplete="off"
             autoCorrect={false}
             selectTextOnFocus={false}
             underlineColor={'transparent'}
-            secureTextEntry={true}
           />
-          <Text style={styles.buttonText}>Verify Password</Text>
-
-          <TextInput
-            style={styles.input}
-            onChangeText={value => setPassword2(value)}
-            placeholder="Re-enter your password"
-            textAlign={'center'}
-            autoCapitalize='none'
-            autoComplete="off"
-            autoCorrect={false}
-            selectTextOnFocus={false}
-            underlineColor={'transparent'}
-            secureTextEntry={true}
-          />
-          <Text style={styles.buttonText}>Passwords must be:</Text>
-          <Text style={styles.buttonText}>at least 8 characters</Text>
+         
+          <Text style={styles.buttonText}>Please refrain from</Text>
+          <Text style={styles.buttonText}>using personal information</Text>
+          <Text style={styles.buttonText}>in your username</Text>
           
 
 
@@ -173,4 +152,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default EmailSignUp3;
+export default UsernameCreation;
