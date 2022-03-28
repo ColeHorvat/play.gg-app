@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, LogBox } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, LogBox, TextInput, SafeAreaView} from 'react-native';
 import { StatusBar } from 'expo-status-bar'
 import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
@@ -7,7 +7,10 @@ import Icon from 'react-native-vector-icons/Feather'
 
 
 
-const Dashboard = ({ navigation }) => {
+const EditProfile = ({ navigation }) => {
+
+    const [text, onChangeText] = React.useState("Useless Text");
+    const [number, onChangeNumber] = React.useState(null);
 
 	return (
 		<View style={styles.container}>
@@ -21,7 +24,7 @@ const Dashboard = ({ navigation }) => {
 						name="chevron-left"
 						style={ styles.icon }
 						size={40}	 
-						color='black'
+						color='white'
 						backgroundColor='#73172F'
 						onPress={() => navigation.navigate('Dashboard')}
 					/>
@@ -33,14 +36,41 @@ const Dashboard = ({ navigation }) => {
                 <Text style={styles.platformsText}>Change Profile Name:</Text>    
             </View>
 
+            
+
+            <SafeAreaView>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeNumber}
+                    value={number}
+                    placeholder="RabidBlueberry"
+                />
+            </SafeAreaView>
+
+
+
             <View>
                 <Text style={styles.platformsText}>Add/Remove Platforms:</Text>    
             </View>
 
-            <View>
-                <Text style={styles.platformsText}>*Save Changes Button Here*</Text>    
-            </View>
-		</View>
+                <View style={{alignItems: 'center', alignSelf: 'flex-start', marginLeft: 16}}>
+                    <TouchableOpacity style={{marginLeft: 16, }}
+						onPress={
+							() => { setShowProfile(!showProfile) }
+						}>
+
+						<View style={styles.menuLogoContainer}>
+							<Image style={styles.menuLogo} source={require('../assets/steam_logo.png')} />
+                            
+						</View>
+                        
+                        <View>
+                            <Text style={styles.platformsText2}>Steam</Text> 
+                        </View>
+					</TouchableOpacity>
+                    
+                </View>
+		    </View>
 
 	)
 	
@@ -54,6 +84,15 @@ const styles = StyleSheet.create({
 		width: '100%',
 		backgroundColor: '#211626'
 	},
+
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        backgroundColor: '#3d2946',
+        color: 'white'
+    },
 
 	logo: {
 		width: 75,
@@ -130,6 +169,15 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
         marginLeft: 20
 	},
+
+	platformsText2: {
+		fontSize: 18,
+		color: 'white',
+        fontWeight: 'bold',
+		marginTop: 10,
+		marginBottom: 10,
+	},
+
 	cardContainer: {
 		height: 150,
 		width: '100%',
@@ -147,4 +195,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Dashboard
+export default EditProfile
