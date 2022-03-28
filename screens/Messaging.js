@@ -141,7 +141,6 @@ const Messaging = ({ navigation, route }) => {
 		)
 	}
 
-
 	{ /* UTIL FUNCTIONS */}
 
 	function sendMessage() { 
