@@ -19,7 +19,7 @@ export default function App() {
 		<Stack.Navigator initialRoutName="Route" headerMode="false" 
                        screenOptions={{headerShown: false }}>
       
-      <Stack.Screen
+      		<Stack.Screen
 				name="Dashboard"
 				component={Dashboard}
 				options={{ title: 'Dashboard', headerShown:false }}
@@ -37,11 +37,11 @@ export default function App() {
 			
 			<Stack.Screen name="EditProfile" component={EditProfile} />
 
-      <Stack.Screen name="EmailSignUp1" component={EmailSignUpView1} />
-      <Stack.Screen name="EmailSignUp2" component={EmailSignUpView2} />
-      <Stack.Screen name="EmailSignUp3" component={EmailSignUpView3} />
+			<Stack.Screen name="EmailSignUp1" component={EmailSignUpView1} />
+			<Stack.Screen name="EmailSignUp2" component={EmailSignUpView2} />
+			<Stack.Screen name="EmailSignUp3" component={EmailSignUpView3} />
 			<Stack.Screen name="UsernameCreation" component={UsernameCreationView} />
-      <Stack.Screen name="EmailSignIn1" component={EmailSigninView1} />
+      		<Stack.Screen name="EmailSignIn1" component={EmailSigninView1} />
 		</Stack.Navigator>
 	</NavigationContainer>
   );

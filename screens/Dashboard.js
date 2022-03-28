@@ -132,7 +132,10 @@ const Dashboard = ({ navigation }) => {
 							<Text style={styles.statusText}>Online</Text>
 						</View>
 							<Text style={styles.editprofileText} 
-							onPress={() => navigation.navigate('EditProfile')}>
+							onPress={() => navigation.navigate('EditProfile', {
+								showPlatform: showPlatform, 
+								setShowPlatform: setShowPlatform,
+							})}>
 								 Edit Profile 
 							</Text>
 						<View style={{ alignItems: 'center', borderTopWidth: .5, borderTopColor: '#707070', width: '100%'}}>

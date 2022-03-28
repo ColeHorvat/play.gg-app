@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, LogBox, TextInput, SafeAreaView} from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput, SafeAreaView, Alert} from 'react-native';
 import { StatusBar } from 'expo-status-bar'
 import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
@@ -7,10 +7,12 @@ import Icon from 'react-native-vector-icons/Feather'
 
 
 
-const EditProfile = ({ navigation }) => {
+const EditProfile = ({ navigation, route }) => {
 
     const [text, onChangeText] = React.useState("Useless Text");
     const [number, onChangeNumber] = React.useState(null);
+	const [username, setUsername] = useState('')
+	const [steamLinked, setSteamLinked] = useState(!route.params.showPlatform)
 
 	return (
 		<View style={styles.container}>
@@ -41,7 +43,7 @@ const EditProfile = ({ navigation }) => {
             <SafeAreaView>
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeNumber}
+                    onChangeText={setUsername}
                     value={number}
                     placeholder="RabidBlueberry"
                 />
@@ -53,10 +55,17 @@ const EditProfile = ({ navigation }) => {
                 <Text style={styles.platformsText}>Add/Remove Platforms:</Text>    
             </View>
 
-                <View style={{alignItems: 'center', alignSelf: 'flex-start', marginLeft: 16}}>
-                    <TouchableOpacity style={{marginLeft: 16, }}
+                <View style={[{alignItems: 'center', alignSelf: 'flex-start', marginLeft: 16, paddingHorizontal: 16}]}>
+                    <TouchableOpacity style={{}}
 						onPress={
-							() => { setShowProfile(!showProfile) }
+							() => { 
+								setSteamLinked(!steamLinked) 
+								route.params.setShowPlatform(steamLinked)
+								if(steamLinked)
+									Alert.alert('Steam is now linked');
+								else
+									Alert.alert('Steam is unlinked')
+							}
 						}>
 
 						<View style={styles.menuLogoContainer}>
@@ -83,6 +92,14 @@ const styles = StyleSheet.create({
 		height: '100%',
 		width: '100%',
 		backgroundColor: '#211626'
+	},
+
+	platformLinked: {
+		backgroundColor: 'black',
+	},
+
+	platformUnlinked: {
+		backgroundColor: 'rgba(33, 22, 38, 75)'
 	},
 
     input: {
