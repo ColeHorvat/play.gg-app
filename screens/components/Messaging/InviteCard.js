@@ -12,10 +12,10 @@ export default function InviteCard(props) {
 	const [mode, setMode] = useState('date');
 	const [show, setShow] = useState(false);
 	const [timeMode, setTimeMode] = useState('start');
-    // DATE PICKER STATES & FUNCTIONS
-    const [title, setTitle] = useState('')
-
-	const [inviteTitleText, setInviteTitleText] = useState(''); 
+ 
+	// DATE PICKER STATES & FUNCTIONS
+ 
+	const [title, setTitle] = useState('')
 	const [inviteDateText, setInviteDateText] = useState('');
 	const [inviteStartTimeText, setInviteStartTimeText] = useState('');
 	const [inviteEndTimeText, setInviteEndTimeText] = useState('');
@@ -66,7 +66,6 @@ export default function InviteCard(props) {
     }
 
     function sendInviteMessage() {
-
         const INVITE_MESSAGE = "INVITE\n\nTitle: " + title + "\n\nDate: " + inviteDateText + "\nStart time: " + inviteStartTimeText + "\nEnd time: " + inviteEndTimeText + "\nLink: <Google Calendar Link>"
         props.setMessageData([...props.messageData, {method: 'send', content: INVITE_MESSAGE }])
     }
@@ -152,7 +151,9 @@ export default function InviteCard(props) {
                         name="send"
                         color="#D92344"
                         backgroundColor="#211626"
-                        onPress={ sendInviteMessage }
+                        onPress={ () => {
+							sendInviteMessage()
+						} }
                     />
                 </View>
             </View>

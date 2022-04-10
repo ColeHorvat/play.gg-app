@@ -116,7 +116,7 @@ const Messaging = ({ navigation, route }) => {
 
 				<InviteCard 
 					setMessageData={setMessageData}
-					toggleInvite={toggleInvite}
+					toggleInvite={ toggleInvite }
 					messageData={messageData}
 				/>
 			)}
