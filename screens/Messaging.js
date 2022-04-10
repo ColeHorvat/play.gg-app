@@ -11,7 +11,7 @@ const Messaging = ({ navigation, route }) => {
 	// LogBox.ignoreAllLogs()
 	const [messageData, setMessageData] = useState([]);
 	const [messageText, setMessageText] = useState('');
-	const [inviteActive, setInviteActive] = useState(false);
+	const [inviteActive, setInviteActive] = useState(route.params.inviteActive);
 	const [addedFriends, setAddedFriends] = useState([]);
 
 

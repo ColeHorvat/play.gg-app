@@ -28,7 +28,8 @@ const Dashboard = ({ navigation }) => {
 			gamePlaying: '',
 			SteamID: SP_STEAMID,
 			Platform: 'Steam',
-			show: false
+			show: false,
+			showTouchMenu: false
 		}
 	]);
 
@@ -241,12 +242,23 @@ const Dashboard = ({ navigation }) => {
 									</Text>
 								</View>
 							</View>
-							<View style={ { position: 'absolute', right:0, top: 50, width : '15%', marginRight: 12} }>
+							<View style={ { position: 'absolute', right:0, top: 20, width : '15%', marginRight: 12} }>
 								<Icon.Button 
 									name='message-square'
 									size={40}
 									backgroundColor="#73172f"
-									onPress={() => navigation.navigate('Messaging', { friend: friend })}
+									onPress={() => navigation.navigate('Messaging', { friend: friend, inviteActive: false })}
+								>
+
+								</Icon.Button>
+							</View>
+
+							<View style={ { position: 'absolute', right:0, bottom: 20, width : '15%', marginRight: 12} }>
+								<Icon.Button 
+									name='mail'
+									size={35}
+									backgroundColor="#73172f"
+									onPress={() => navigation.navigate('Messaging', { friend: friend, inviteActive: true })}
 								>
 
 								</Icon.Button>
@@ -282,6 +294,8 @@ const Dashboard = ({ navigation }) => {
 			}
 		}
 	}
+
+
 
     // const getFriendData = async () => {
     //     try {
