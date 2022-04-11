@@ -111,8 +111,6 @@ export default function InviteCard(props) {
                     style={ [styles.inviteMessageInput, { marginTop: 12}]}
                     placeholder="Title"
                     placeholderTextColor='white'
-                    //onSubmitEnding={ v => setInviteTitleText(v) }
-                    // defaultValue={ title }
                     value={ title }
                     onChangeText={ v => setTitle(v) }
                 />

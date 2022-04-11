@@ -11,9 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const Dashboard = ({ navigation }) => {
 	const API_KEY = '17CB3BD18765C9F04AAB50A3EC9CA2A3'
-	const RB_STEAMID = '76561198114121125';
 	const SP_STEAMID = '76561198124794637'
-	const RB_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=' + RB_STEAMID;
 	const BASE_URL = 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' + API_KEY + '&steamids=';
 	
 	LogBox.ignoreAllLogs()
@@ -29,7 +27,6 @@ const Dashboard = ({ navigation }) => {
 			SteamID: SP_STEAMID,
 			Platform: 'Steam',
 			show: false,
-			showTouchMenu: false
 		}
 	]);
 
@@ -294,45 +291,6 @@ const Dashboard = ({ navigation }) => {
 			}
 		}
 	}
-
-
-
-    // const getFriendData = async () => {
-    //     try {
-    //         return await AsyncStorage.getItem('Friends')
-    //     } catch(err) {
-    //         console.error(err)
-    //     }
-    // }
-
-    // const storeFriendData = async (value) => {
-    //     try {
-	// 		await AsyncStorage.clear()
-	// 		if(await AsyncStorage.getItem('Friends') == null) {
-	// 			console.log("HIT")
-	// 			await AsyncStorage.setItem('Friends', JSON.stringify([]))
-	// 		}
-	// 		console.log("HIT2")
-	// 		console.log(await JSON.parse(AsyncStorage.getItem('Friends')))
-    //         // await AsyncStorage.setItem("Friends", value)
-    //     } catch (err) {
-    //         console.error(err)
-    //     }
-    // }
-	
-	
-	// return (
-	// 	<View style={styles.container}>
-
-
-
-
-
-
-
-	// 	</View>
-
-	// )
 
 const styles = StyleSheet.create({
 	container: {

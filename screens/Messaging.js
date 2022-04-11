@@ -13,17 +13,9 @@ const Messaging = ({ navigation, route }) => {
 	const [messageText, setMessageText] = useState('');
 	const [inviteActive, setInviteActive] = useState(route.params.inviteActive);
 	const [addedFriends, setAddedFriends] = useState([]);
-
-
 	
 	const scrollView = useRef(null);
 	const textInput = useRef(null);
-
-
-
-	const FRIENDS = {
-		"1":"SirPancakes"
-	}
 
 	const messages = messageData.map((message) => {
 		if(message.method === 'send') {
@@ -153,22 +145,12 @@ const Messaging = ({ navigation, route }) => {
 		}
 	}
 
-	
-
 	function receiveMessage() {
 		setMessageData([...messageData, { method: 'receive', content: 'NEW MESSAGE'}])
 	}
 
 	function toggleInvite() {
 		setInviteActive(!inviteActive)
-	}
-
-	function generateKey(pre) {
-		return `${ pre }_${new Date().getTime() }`
-	}
-
-	function addInviteFriend(friendName) {
-		setAddedFriends(...addedFriends, generatefriendName )
 	}
 
 	function StatusText(friend) {
@@ -194,9 +176,6 @@ const Messaging = ({ navigation, route }) => {
 		}
 	}
 }
-
-
-
 
 
 { /* STYLES */}
