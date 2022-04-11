@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image, LogBox, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Platform, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather'
 import Constants from 'expo-constants'
 import DateTimePicker from '@react-native-community/datetimepicker'

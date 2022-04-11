@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image, LogBox } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Image}from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/Feather'

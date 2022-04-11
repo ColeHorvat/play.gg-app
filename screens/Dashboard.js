@@ -5,7 +5,6 @@ import Constants from 'expo-constants';
 import ProfilePicture from 'react-native-profile-picture'
 import Icon from 'react-native-vector-icons/Feather'
 import FriendRequest from './components/Dashboard/FriendRequest';
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 
