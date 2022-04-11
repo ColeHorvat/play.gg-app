@@ -19,7 +19,9 @@ export default function App() {
 		<Stack.Navigator initialRoutName="Route" headerMode="false" 
                        screenOptions={{headerShown: false }}>
      
-      		
+      	
+	  		<Stack.Screen name="MainLoginScreen" component={LoginView} />
+
 			  <Stack.Screen
 				name="Dashboard"
 				component={Dashboard}
@@ -27,7 +29,6 @@ export default function App() {
 			/>
 
 			
-	  		<Stack.Screen name="MainLoginScreen" component={LoginView} />
 			
 			<Stack.Screen 
 				name="Messaging"
