@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image, LogBox } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Image}from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants'
 import Icon from 'react-native-vector-icons/Feather'
@@ -11,19 +11,11 @@ const Messaging = ({ navigation, route }) => {
 	// LogBox.ignoreAllLogs()
 	const [messageData, setMessageData] = useState([]);
 	const [messageText, setMessageText] = useState('');
-	const [inviteActive, setInviteActive] = useState(false);
+	const [inviteActive, setInviteActive] = useState(route.params.inviteActive);
 	const [addedFriends, setAddedFriends] = useState([]);
-
-
 	
 	const scrollView = useRef(null);
 	const textInput = useRef(null);
-
-
-
-	const FRIENDS = {
-		"1":"SirPancakes"
-	}
 
 	const messages = messageData.map((message) => {
 		if(message.method === 'send') {
@@ -88,7 +80,8 @@ const Messaging = ({ navigation, route }) => {
 
 				<View style = { styles.messageButtons }> 
 					<Icon.Button 
-						name="inbox"
+						name="mail"
+						size={25}
 						color="#D92344"
 						backgroundColor="#211626"
 						onPress={ toggleInvite }
@@ -101,6 +94,7 @@ const Messaging = ({ navigation, route }) => {
 				<View style = { styles.messageButtons }>
 					<Icon.Button 
 						name="send"
+						size={25}
 						color="#D92344"
 						backgroundColor="#211626"
 						onPress={ sendMessage }
@@ -116,7 +110,7 @@ const Messaging = ({ navigation, route }) => {
 
 				<InviteCard 
 					setMessageData={setMessageData}
-					toggleInvite={toggleInvite}
+					toggleInvite={ toggleInvite }
 					messageData={messageData}
 				/>
 			)}
@@ -151,22 +145,12 @@ const Messaging = ({ navigation, route }) => {
 		}
 	}
 
-	
-
 	function receiveMessage() {
 		setMessageData([...messageData, { method: 'receive', content: 'NEW MESSAGE'}])
 	}
 
 	function toggleInvite() {
 		setInviteActive(!inviteActive)
-	}
-
-	function generateKey(pre) {
-		return `${ pre }_${new Date().getTime() }`
-	}
-
-	function addInviteFriend(friendName) {
-		setAddedFriends(...addedFriends, generatefriendName )
 	}
 
 	function StatusText(friend) {
@@ -192,9 +176,6 @@ const Messaging = ({ navigation, route }) => {
 		}
 	}
 }
-
-
-
 
 
 { /* STYLES */}
@@ -266,9 +247,8 @@ const styles = StyleSheet.create({
 		
 	},
 	messageButtons: {
-		width : 45,
+		width : 55,
 		height : 45,
-		marginHorizontal: 2,
 		marginBottom: 12,
 
 	},

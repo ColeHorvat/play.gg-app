@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet} from 'react-native'
-import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/Feather'
 import ProfilePicture from 'react-native-profile-picture'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function FriendRequest(props) {
 
