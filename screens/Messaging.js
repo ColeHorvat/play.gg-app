@@ -88,7 +88,8 @@ const Messaging = ({ navigation, route }) => {
 
 				<View style = { styles.messageButtons }> 
 					<Icon.Button 
-						name="inbox"
+						name="mail"
+						size={25}
 						color="#D92344"
 						backgroundColor="#211626"
 						onPress={ toggleInvite }
@@ -101,6 +102,7 @@ const Messaging = ({ navigation, route }) => {
 				<View style = { styles.messageButtons }>
 					<Icon.Button 
 						name="send"
+						size={25}
 						color="#D92344"
 						backgroundColor="#211626"
 						onPress={ sendMessage }
@@ -266,9 +268,8 @@ const styles = StyleSheet.create({
 		
 	},
 	messageButtons: {
-		width : 45,
+		width : 55,
 		height : 45,
-		marginHorizontal: 2,
 		marginBottom: 12,
 
 	},

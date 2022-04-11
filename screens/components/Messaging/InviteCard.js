@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image, LogBox } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Platform, Image, LogBox, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather'
 import Constants from 'expo-constants'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -69,6 +69,24 @@ export default function InviteCard(props) {
         const INVITE_MESSAGE = "INVITE\n\nTitle: " + title + "\n\nDate: " + inviteDateText + "\nStart time: " + inviteStartTimeText + "\nEnd time: " + inviteEndTimeText + "\nLink: <Google Calendar Link>"
         props.setMessageData([...props.messageData, {method: 'send', content: INVITE_MESSAGE }])
     }
+
+	function checkInviteText() {
+		if(title == '') {
+			Alert.alert('Please fill out title field')
+			return;
+		} else if(inviteDateText == '') {
+			Alert.alert('Please specify a date')
+			return;
+		} else if(inviteStartTimeText == '') {
+			Alert.alert('Please specify a start time')
+			return;
+		} else if(inviteEndTimeText == '') {
+			Alert.alert('Please specify an end time')
+			return;
+		}
+
+		sendInviteMessage()
+	}
 
     return (
         <View style = { [styles.inviteContainer] }>
@@ -149,10 +167,12 @@ export default function InviteCard(props) {
                 <View style = { [ styles.inviteSendButton ]}>
                     <Icon.Button 
                         name="send"
+						size={25}
                         color="#D92344"
                         backgroundColor="#211626"
                         onPress={ () => {
-							sendInviteMessage()
+							checkInviteText()
+							props.toggleInvite //Doesn't work for some reason
 						} }
                     />
                 </View>
@@ -244,8 +264,9 @@ const styles = StyleSheet.create({
 		marginHorizontal: 4,
 	},
 	inviteSendButton: {
-		width : 45,
+		width : 60,
 		height : 45,
+		marginBottom: 12,
 	},
 	item: {
 		marginVertical: 14,
