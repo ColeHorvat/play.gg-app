@@ -31,7 +31,7 @@ const Dashboard = ({ navigation }) => {
 
 	function getSteamInfo() {
 			friends.map((friend, i) => {
-				fetch(BASE_URL + friend.SteamID)
+				fetch(BASE_URL + friend.SteamID, {mode: "cors", headers: { "Access-Control-Allow-Origin":'*' }})
 				.then((response) => response.json())
 				.then((responseJson) => {
 					return responseJson['response']['players']['0'];
